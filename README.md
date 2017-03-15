@@ -1,14 +1,13 @@
-# Tietokantasovelluksen esittelysivu
-
-Yleisiä linkkejä:
-
-* [Linkki sovellukseeni](https://www.cs.helsinki.fi)
-* [Linkki dokumentaatiooni](https://www.github.com)
-
 ## Työaihetietokanta
 
-Laita tähän aihekuvaus tai [linkki valmiiseen aiheeseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Pokemon-kanta.html)
+Työn tarkoituksena on ohjelmoida yksinkertainen tietokantasovellus harjoitustyöaiheiden ja niihin liittyvien suoritusten ylläpitoon.
 
-Jokainen aihe liittyy johonkin kurssiin. Sillä on kuvaus, maksimiarvosana ja vaikeustaso. Joka aiheella on yksi tai useampi vaihtoehtoista tapaa, miten harjoitustyö voidaan tehdä.
+Järjestelmän avulla käyttäjät voivat katsella eri kursseihin liittyviä harjoitustyöaiheita. Opettajat ja ylläpitäjä näkevät yksityiskohtaisia tietoja liittyen siihen, miten usein jokin tietty aihe on valittu, miten kauan sen suoritukseen on mennyt, mitä arvosanoja siitä on saatu jne.
 
-Opiskelijalla voi olla yksi tai useampia harjoitustöitä (maksimissaan yksi jokaiselle kurssille. Suorituksella voi olla useampia opiskelijoita, jos se tehdään ryhmätyönä.
+Jokainen aihe liittyy johonkin kurssiin. Sillä on kuvaus, maksimiarvosana ja vaikeustaso.
+
+Opiskelijalla voi olla yksi tai useampia harjoitustöitä (maksimissaan yksi jokaiselle kurssille). Yhteen aiheeseen voi liittyä useampia harjoitustyösuoritus.
+
+Opettajat voivat lisätä uusia harjoitustyöaiheita ja muokata niihin liittyviä tietoja.
+
+Projekti toteutetaan laitoksen users-palvelimella käyttäen php-ohjelmointikieltä sekä PostgreSQL-tietokantapalvelinta.
