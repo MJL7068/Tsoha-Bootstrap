@@ -1,6 +1,6 @@
 ## Työaihetietokanta
 
-[Linkki projektin github-repositioon](https://github.com/MJL7068/Tsoha-Bootstrap)
+[Linkki projektin dokumentaatioon](https://github.com/MJL7068/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 
 [Linkki projektiin users-palvelimella](http://matleino.users.cs.helsinki.fi/projekti/)
 
