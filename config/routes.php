@@ -7,3 +7,7 @@
   $routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
   });
+
+  $routes->get('/aiheet', function() {
+    HelloWorldController::aihe_lista();
+  });
