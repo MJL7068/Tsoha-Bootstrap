@@ -3,7 +3,19 @@
   class HelloWorldController extends BaseController{
 
     public static function aihe_lista() {
-	View::make('suunnitelmat/aihe_lista.html');
+	    View::make('suunnitelmat/aihe_lista.html');
+    }
+
+    public static function login() {
+      View::make('suunnitelmat/login.html');
+    }
+
+    public static function aihe_esittely() {
+      View::make('suunnitelmat/aihe_esittely.html');
+    }
+
+    public static function opiskelija() {
+      View::make('suunnitelmat/opiskelija.html');
     }
 
     public static function index(){
