@@ -23,3 +23,7 @@
   $routes->get('/opiskelija', function() {
     HelloWorldController::opiskelija();
   });
+
+  $routes->get('/haku', function() {
+    HelloWorldController::haku();
+  });

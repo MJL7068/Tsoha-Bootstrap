@@ -18,6 +18,10 @@
       View::make('suunnitelmat/opiskelija.html');
     }
 
+    public static function haku() {
+      View::make('suunnitelmat/haku.html');
+    }
+
     public static function index(){
       // make-metodi renderöi app/views-kansiossa sijaitsevia tiedostoja
    	  //View::make('home.html');
