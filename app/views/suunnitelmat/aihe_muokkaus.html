@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Muokkaa aihetta</h1>
+
+  <h2>Drinkkikirjasto</h2>
+  <form>
+    <div class="form-group">
+      <label>Nimi</label>
+      <input class="form-control" value="Drinkkikirjasto" type="text">
+    </div>
+    <div class="form-group">
+      <label>Vaikeustaso</label>
+      <input class="form-control" value="keskitasoa" type="text">
+    </div>
+    <div class="form-group">
+      <label>Maksimiarvosana</label>
+      <input class="form-control" value="5" type="text">
+    </div>
+    <div class="form-group">
+      <label>Kuvaus</label>
+      <textarea class="form-control">        Tehtävänä on laatia www-sivulla toimiva drinkinhakulomake.
+      </textarea>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Tallenna</button>
+    </div>
+  </form>
+{% endblock %}
