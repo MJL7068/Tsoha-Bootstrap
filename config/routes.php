@@ -15,13 +15,29 @@
   $routes->get('/aihe', function() {
     HelloWorldController::aihe_esittely();
   });
+  
+  $routes->get('/aihemuokkaus', function() {
+    HelloWorldController::aihe_muokkaus();
+  });
+  
+  $routes->get('/suoritus', function() {
+    HelloWorldController::suoritus_esittely();
+  });
 
+  $routes->get('/suoritusmuokkaus', function() {
+    HelloWorldController::suoritus_muokkaus();
+  });
+  
   $routes->get('/login', function() {
     HelloWorldController::login();
   });
 
   $routes->get('/opiskelija', function() {
     HelloWorldController::opiskelija();
+  });
+  
+  $routes->get('/opettaja', function() {
+    HelloWorldController::opettaja();
   });
 
   $routes->get('/haku', function() {
