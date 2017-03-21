@@ -34,6 +34,7 @@ CREATE TABLE Suoritus(
     aihe INTEGER REFERENCES Aihe(id),
     tekija INTEGER REFERENCES Opiskelija(id),
     ohjaaja INTEGER REFERENCES Opettaja(id),
+    kuvaus varchar(400),
     tyomaara INTEGER,
     arvosana INTEGER
 );
