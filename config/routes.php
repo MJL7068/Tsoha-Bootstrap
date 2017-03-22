@@ -9,7 +9,7 @@
   });
 
   $routes->get('/aiheet', function() {
-    HelloWorldController::aihe_lista();
+    AiheetController::aihe_lista();
   });
 
   $routes->get('/aihe', function() {
