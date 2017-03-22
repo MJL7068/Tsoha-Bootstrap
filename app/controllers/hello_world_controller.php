@@ -1,6 +1,16 @@
 <?php
 
+  require 'app/models/aihe.php';
+
   class HelloWorldController extends BaseController{
+
+    public static function sandbox() {
+      $drinkit = Aihe::find(1);
+      $aiheet = Aihe::all();
+
+      Kint::dump($aiheet);
+      Kint::dump($drinkit);
+    }
 
     public static function aihe_lista() {
 	    View::make('suunnitelmat/aihe_lista.html');

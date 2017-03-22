@@ -12,21 +12,13 @@
       </tr>
     </thead>
     <tbody>
+      {% for aihe in aiheet %}
       <tr>
-        <td>Drinkkikirjasto</td>
-        <td>Keskitasoa</td>
-        <td>5</td>
+        <td>{{aihe.nimi}}</td>
+        <td>{{aihe.vaikeustaso}}</td>
+        <td>{{aihe.maksimiarvosana}}</td>
       </tr>
-      <tr>
-        <td>Huutokauppa</td>
-        <td>Haastavampi</td>
-        <td>5</td>
-      </tr>
-      <tr>
-        <td>Äänestys</td>
-        <td>Helppo</td>
-        <td>3</td>
-      </tr>
+      {% endfor %}
     </tbody>
   </table>
 </div>
