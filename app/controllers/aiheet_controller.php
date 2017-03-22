@@ -6,4 +6,10 @@ class AiheetController extends BaseController {
 
         View::make('suunnitelmat/aihe_lista.html', array('aiheet') => $aiheet);
     }
+	
+	public static function show($id) {
+		$aihe = Aihe:find($id);
+		
+		View::make('suunnitelmat/aihe_esittely.html', array('aihe') => $aihe;
+	}
 }
