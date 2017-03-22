@@ -1,4 +1,4 @@
-## Työaihetietokanta
+# Työaihetietokanta
 
 [Linkki projektin dokumentaatioon](https://github.com/MJL7068/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 
