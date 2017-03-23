@@ -18,12 +18,12 @@ Projekti toteutetaan laitoksen users-palvelimella käyttäen php-ohjelmointikiel
 
 [Aiheen muokkaussivu](http://matleino.users.cs.helsinki.fi/projekti/aihemuokkaus). Ylläpitäjä voi muokata harjoitustyöaiheeseen liittyviä tietoja.
 
-[Suorituksen esittelysivu](http://matleino.users.cs.helsinki.fi/projekti/suoritus). Sivulla näkyy opiskelijan harjoitustyösuoritukseen liittyviä yksityiskohtia.
+[Suorituksen esittelysivu](http://matleino.users.cs.helsinki.fi/projekti/suoritus1). Sivulla näkyy opiskelijan harjoitustyösuoritukseen liittyviä yksityiskohtia.
 
 [Suorituksen muokkaussivu](http://matleino.users.cs.helsinki.fi/projekti/suoritusmuokkaus). Ylläpitäjä voi muokata suoritukseen liittyviä tietoja.
 
 [Opiskelijan esittelysivu](http://matleino.users.cs.helsinki.fi/projekti/opiskelija/1). Sivulla näkyy opiskelijaan liittyviä tietoja ja lista hänen tekemistään harjoitustöistä.
 
-[Opettajan esittelysivu](http://matleino.users.cs.helsinki.fi/projekti/opettaja/1). Sivulla näkyy opettajana ohjaamat harjoitustyöt.
+[Opettajan esittelysivu](http://matleino.users.cs.helsinki.fi/projekti/opettaja/1). Sivulla näkyy opettajan ohjaamat harjoitustyöt.
 
 [Kirjautumissivu](http://matleino.users.cs.helsinki.fi/projekti/login).
