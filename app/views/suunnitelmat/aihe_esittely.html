@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Drinkkikirjasto</h1>
+  <h1>{{aihe.nimi}}</h1>
 
   <ul>
-    <li><strong>Kuessi:</strong> Tietokantasovellus</li>
-    <li><strong>Vaikeustaso:</strong> keskitasoa</li>
-    <li><strong>Maksimiarvosana:</strong> 5</li>
+    <li><strong>Kurssi:</strong> Tietokantasovellus</li>
+    <li><strong>Vaikeustaso:</strong> {{aihe.vaikeustaso}}</li>
+    <li><strong>Maksimiarvosana:</strong> {{aihe.maksimiarvosana}}</li>
   </ul>
 
   <p>
-    Tehtävänä on laatia www-sivulla toimiva drinkinhakulomake.
+    {{aihe.kuvaus}}
       </p>
 	  
 	<h2>Suoritukset</h2>

@@ -5,15 +5,15 @@
   });
 
   $routes->get('/', function() {
-    HelloWorldController::index();
+    AiheetController::aihe_lista();
   });
 
   $routes->get('/aiheet', function() {
     AiheetController::aihe_lista();
   });
 
-  $routes->get('/aihe', function() {
-    HelloWorldController::aihe_esittely();
+  $routes->get('/aihe/:id', function($id) {
+    AiheetController::show($id);
   });
   
   $routes->get('/aihemuokkaus', function() {
@@ -32,12 +32,12 @@
     HelloWorldController::login();
   });
 
-  $routes->get('/opiskelija', function() {
-    HelloWorldController::opiskelija();
+  $routes->get('/opiskelija/:id', function($id) {
+    OpiskelijaController::show($id);
   });
   
-  $routes->get('/opettaja', function() {
-    HelloWorldController::opettaja();
+  $routes->get('/opettaja/:id', function($id) {
+    OpettajaController::show($id);
   });
 
   $routes->get('/haku', function() {

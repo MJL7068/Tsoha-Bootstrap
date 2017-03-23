@@ -1,0 +1,41 @@
+<?php
+
+class Opettaja extends BaseModel {
+    public $id, $nimi;
+
+    public function __construct($attributes) {
+        parent::__construct($attributes);
+    }
+
+    public static function all() {
+        $query = DB::connection()->prepare('SELECT * FROM Opettaja');
+        $query->execute();
+
+        $rows = $query->fetchAll();
+        $opettajat = array();
+
+        foreach($rows as $row) {
+            $opettajat[] = new Opettaja(array(
+                'id' => $row['id'],
+                'nimi' => $row['nimi']
+            ));
+        }
+
+        return $opettajat;
+    }
+
+    public static function find($id) {
+        $query = DB::connection()->prepare('SELECT * FROM Opettaja WHERE id = :id LIMIT 1');
+        $query->execute(array('id' => $id));
+        $row = $query->fetch();
+
+        if ($row) {
+            $opettaja = new Opettaja(array(
+                'id' => $row['id'],
+                'nimi' => $row['nimi']
+            ));
+
+            return $opettaja;
+        }
+    }
+}

@@ -14,7 +14,7 @@ Projekti toteutetaan laitoksen users-palvelimella käyttäen php-ohjelmointikiel
 
 [Aiheiden listaussivu](http://matleino.users.cs.helsinki.fi/projekti/aiheet). Tällä sivulla listataan kaikki eri harjoitustyöaiheet. Toimii tällä hetkellä myös etusivuna. Ideana on että käyttäjä näkee heti järjestelmän avattuaan kaikki aiheet.
 
-[Aiheen esittelysivu](http://matleino.users.cs.helsinki.fi/projekti/aihe). Sivulla näkyy aiheeseen liittyvät yksityiskohdat ja lisäksi lista niistä opiskelijoista, jotka ovat tehneet aiheesta harjoitustyön.
+[Aiheen esittelysivu](http://matleino.users.cs.helsinki.fi/projekti/aihe/1). Sivulla näkyy aiheeseen liittyvät yksityiskohdat ja lisäksi lista niistä opiskelijoista, jotka ovat tehneet aiheesta harjoitustyön.
 
 [Aiheen muokkaussivu](http://matleino.users.cs.helsinki.fi/projekti/aihemuokkaus). Ylläpitäjä voi muokata harjoitustyöaiheeseen liittyviä tietoja.
 
@@ -22,8 +22,8 @@ Projekti toteutetaan laitoksen users-palvelimella käyttäen php-ohjelmointikiel
 
 [Suorituksen muokkaussivu](http://matleino.users.cs.helsinki.fi/projekti/suoritusmuokkaus). Ylläpitäjä voi muokata suoritukseen liittyviä tietoja.
 
-[Opiskelijan esittelysivu](http://matleino.users.cs.helsinki.fi/projekti/opiskelija). Sivulla näkyy opiskelijaan liittyviä tietoja ja lista hänen tekemistään harjoitustöistä.
+[Opiskelijan esittelysivu](http://matleino.users.cs.helsinki.fi/projekti/opiskelija/1). Sivulla näkyy opiskelijaan liittyviä tietoja ja lista hänen tekemistään harjoitustöistä.
 
-[Opettajan esittelysivu](http://matleino.users.cs.helsinki.fi/projekti/opettaja). Sivulla näkyy opettajana ohjaamat harjoitustyöt.
+[Opettajan esittelysivu](http://matleino.users.cs.helsinki.fi/projekti/opettaja/1). Sivulla näkyy opettajana ohjaamat harjoitustyöt.
 
 [Kirjautumissivu](http://matleino.users.cs.helsinki.fi/projekti/login).

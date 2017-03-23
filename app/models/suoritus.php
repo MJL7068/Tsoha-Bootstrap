@@ -17,9 +17,9 @@ class Suoritus extends BaseModel{
         foreach($rows as $row) {
             $suoritukset[] = new Suoritus(array(
                 'id' => $row['id'],
-                'aihe' => $row['nimi'],
-                'tekija' => $row['vaikeustaso'],
-                'ohjaaja' => $row['maksimiarvosana'],                
+                'aihe' => $row['aihe'],
+                'tekija' => $row['tekija'],
+                'ohjaaja' => $row['ohjaaja'],                
                 'kuvaus' => $row['kuvaus'],
 				'tyomaara' => $row['tyomaara'],
 				'arvosana' => $row['arvosana']
@@ -37,9 +37,9 @@ class Suoritus extends BaseModel{
         if ($row) {
             $suoritus = new Suoritus(array(
                 'id' => $row['id'],
-                'aihe' => $row['nimi'],
-                'tekija' => $row['vaikeustaso'],
-                'ohjaaja' => $row['maksimiarvosana'],                
+                'aihe' => $row['aihe'],
+                'tekija' => $row['tekija'],
+                'ohjaaja' => $row['ohjaaja'],                
                 'kuvaus' => $row['kuvaus'],
 				'tyomaara' => $row['tyomaara'],
 				'arvosana' => $row['arvosana']
