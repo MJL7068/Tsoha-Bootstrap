@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+ <div class="container">
+  <h2>Aiheet</h2>            
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Kurssin nimi</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for kurssi in kurssit %}
+      <tr>
+        <td><a href="{{base_path}}/kurssi/{{kurssi.id}}">{{kurssi.nimi}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

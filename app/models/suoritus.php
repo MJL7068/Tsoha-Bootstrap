@@ -48,4 +48,48 @@ class Suoritus extends BaseModel{
             return $suoritus;
         }
     }
+
+    public static function haeSuorituksetTekijanMukaan($id) {
+        $query = DB::connection()->prepare('SELECT * FROM Suoritus WHERE tekija = :id LIMIT 1');
+        $query->execute(array('id' => $id));
+
+        $rows = $query->fetchAll();
+        $suoritukset = array();
+
+        foreach($rows as $row) {
+            $suoritukset[] = new Suoritus(array(
+                'id' => $row['id'],
+                'aihe' => $row['aihe'],
+                'tekija' => $row['tekija'],
+                'ohjaaja' => $row['ohjaaja'],                
+                'kuvaus' => $row['kuvaus'],
+				'tyomaara' => $row['tyomaara'],
+				'arvosana' => $row['arvosana']
+            ));
+        }
+
+        return $suoritukset;
+    }
+
+    public static function haeSuorituksetOhjaajanMukaan($id) {
+        $query = DB::connection()->prepare('SELECT * FROM Suoritus WHERE ohjaaja = :id LIMIT 1');
+        $query->execute(array('id' => $id));
+
+        $rows = $query->fetchAll();
+        $suoritukset = array();
+
+        foreach($rows as $row) {
+            $suoritukset[] = new Suoritus(array(
+                'id' => $row['id'],
+                'aihe' => $row['aihe'],
+                'tekija' => $row['tekija'],
+                'ohjaaja' => $row['ohjaaja'],                
+                'kuvaus' => $row['kuvaus'],
+				'tyomaara' => $row['tyomaara'],
+				'arvosana' => $row['arvosana']
+            ));
+        }
+
+        return $suoritukset;
+    }
 }

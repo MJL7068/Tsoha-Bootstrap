@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>{{kurssi.nimi}}</h1>
+	  
+	<h2>Aiheet</h2>            
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Työn nimi</th>
+        <th>Vaikeustaso</th>
+        <th>Maksimiarvosana</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for aihe in aiheet %}
+      <tr>
+        <td><a href="{{base_path}}/aihe/{{aihe.id}}" >{{aihe.nimi}}</td>
+        <td>{{aihe.vaikeustaso}}</td>
+        <td>{{aihe.maksimiarvosana}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

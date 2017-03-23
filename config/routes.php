@@ -8,6 +8,14 @@
     AiheetController::aihe_lista();
   });
 
+  $routes->get('/kurssit', function() {
+    KurssitController::kurssit();
+  });
+
+  $routes->get('/kurssi/:id', function($id) {
+    KurssitController::show($id);
+  });
+
   $routes->get('/aiheet', function() {
     AiheetController::aihe_lista();
   });
@@ -20,8 +28,8 @@
     HelloWorldController::aihe_muokkaus();
   });
   
-  $routes->get('/suoritus', function() {
-    HelloWorldController::suoritus_esittely();
+  $routes->get('/suoritus/:id', function($id) {
+    SuoritusController::show($id);
   });
 
   $routes->get('/suoritusmuokkaus', function() {

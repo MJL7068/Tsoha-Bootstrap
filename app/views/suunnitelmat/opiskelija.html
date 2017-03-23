@@ -7,23 +7,18 @@
     <li><strong>opiskelijanumero:</strong> {{opiskelija.opiskelijanumero}}</li>
   </ul>
   
-  <h2>Harjoitustyöt</h2>
   <table class="table">
     <thead>
       <tr>
-        <th>Kurssi</th>
-        <th>Nimi</th>
+        <th>Harjoitustyö</th>
       </tr>
     </thead>
     <tbody>
+      {% for harjoitus in harjoitustyot %}
       <tr>
-        <td>Tietokantasovellus</td>
-        <td>Drinkkikirjasto</td>
+        <td><a href="{{base_path}}/suoritus/{{harjoitus.id}}">{{harjoitus.id}}</td>
       </tr>
-      <tr>
-        <td>Ohjelmoinnin harjoitustyö</td>
-        <td>Laivanupotus</td>
-      </tr>
+      {% endfor %}
     </tbody>
   </table>
 {% endblock %}

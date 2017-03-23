@@ -3,14 +3,14 @@
   <h1>Harjoitustyö</h1>
 
   <ul>
-    <li><strong>Aihe:</strong> Drinkkikirjasto</li>
-    <li><strong>Tekijä:</strong> Matti Meikäläinen</li>
-    <li><strong>Ohjaaja:</strong> Ossi Opettaja</li>
+    <li><strong>Aihe:</strong><a href="{{base_path}}/aihe/{{aihe.id}}"> {{aihe.nimi}}</a></li>
+    <li><strong>Tekijä:</strong><a href="{{base_path}}/opiskelija/{{tekija.id}}"> {{tekija.nimi}}</a></li>
+    <li><strong>Ohjaaja:</strong><a href="{{base_path}}/opettaja/{{ohjaaja.id}}"> {{ohjaaja.nimi}}</a></li>
     <li><strong>Linkki harjoitustyöhön:</strong> linkki</li>
-	  <li><strong>Arvosana: </strong> 5</li>
+	  <li><strong>Arvosana: </strong> {{suoritus.arvosana}}</li>
   </ul>
 
   <p>
-    Tämän harjoitustyön aiheena on drinkkikirjasto.
+    {{suoritus.kuvaus}}
   </p>
 {% endblock %}

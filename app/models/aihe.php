@@ -46,4 +46,25 @@ class Aihe extends BaseModel{
             return $aihe;
         }
     }
+
+    public static function aiheetKurssinPerusteella($id) {
+        $query = DB::connection()->prepare('SELECT * FROM Aihe WHERE kurssi = :id LIMIT 1');
+        $query->execute(array('id' => $id));
+        
+        $rows = $query->fetchAll();
+        $aiheet = array();
+
+        foreach($rows as $row) {
+            $aiheet[] = new Aihe(array(
+                'id' => $row['id'],
+                'nimi' => $row['nimi'],
+                'vaikeustaso' => $row['vaikeustaso'],
+                'maksimiarvosana' => $row['maksimiarvosana'],
+                'kurssi' => $row['kurssi'],
+                'kuvaus' => $row['kuvaus']
+            ));
+        }
+
+        return $aiheet;
+    }
 }

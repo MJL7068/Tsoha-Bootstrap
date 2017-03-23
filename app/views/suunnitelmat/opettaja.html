@@ -11,14 +11,12 @@
       </tr>
     </thead>
     <tbody>
+      {% for aihe in aiheet %}
       <tr>
         <td>Tietokantasovellus</td>
         <td>Drinkkikirjasto</td>
       </tr>
-      <tr>
-        <td>Ohjelmoinnin harjoitustyö</td>
-        <td>Laivanupotus</td>
-      </tr>
+      {% endfor %}
     </tbody>
   </table>
 {% endblock %}
