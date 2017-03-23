@@ -92,4 +92,26 @@ class Suoritus extends BaseModel{
 
         return $suoritukset;
     }
+
+    public static function haeSuorituksetAiheenMukaan($id) {
+        $query = DB::connection()->prepare('SELECT * FROM Suoritus WHERE aihe = :id LIMIT 1');
+        $query->execute(array('id' => $id));
+
+        $rows = $query->fetchAll();
+        $suoritukset = array();
+
+        foreach($rows as $row) {
+            $suoritukset[] = new Suoritus(array(
+                'id' => $row['id'],
+                'aihe' => $row['aihe'],
+                'tekija' => $row['tekija'],
+                'ohjaaja' => $row['ohjaaja'],                
+                'kuvaus' => $row['kuvaus'],
+				'tyomaara' => $row['tyomaara'],
+				'arvosana' => $row['arvosana']
+            ));
+        }
+
+        return $suoritukset;
+    }
 }

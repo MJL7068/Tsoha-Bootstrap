@@ -14,7 +14,7 @@
     <tbody>
       {% for aihe in aiheet %}
       <tr>
-        <td>{{aihe.nimi}}</td>
+        <td><a href="{{base_path}}/aihe/{{aihe.id}}">{{aihe.nimi}}</a></td>
         <td>{{aihe.vaikeustaso}}</td>
         <td>{{aihe.maksimiarvosana}}</td>
       </tr>

@@ -9,7 +9,9 @@ class AiheetController extends BaseController {
 	
 	public static function show($id) {
 		$aihe = Aihe::find($id);
+
+        $suoritukset = Suoritus::haeSuorituksetAiheenMukaan($id);
 		
-		View::make('suunnitelmat/aihe_esittely.html', array('aihe' => $aihe));
+		View::make('suunnitelmat/aihe_esittely.html', array('aihe' => $aihe, 'suoritukset' => $suoritukset));
 	}
 }

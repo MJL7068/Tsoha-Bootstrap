@@ -13,7 +13,18 @@
       </p>
 	  
 	<h2>Suoritukset</h2>
-	<ul>
-		<li>Matti Meikäläinen</li>
-	</ul>
+	<table class="table">
+    <thead>
+      <tr>
+        <th>Suoritus</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for suoritus in suoritukset %}
+      <tr>
+        <td><a href="{{base_path}}/suoritus/{{suoritus.id}}">{{suoritus.id}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}
