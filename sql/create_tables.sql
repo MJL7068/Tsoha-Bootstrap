@@ -32,6 +32,7 @@ CREATE TABLE Aihe(
 CREATE TABLE Suoritus(
     id SERIAL PRIMARY KEY,
     aihe INTEGER REFERENCES Aihe(id),
+    nimi varchar(50) NOT NULL,
     tekija INTEGER REFERENCES Opiskelija(id),
     ohjaaja INTEGER REFERENCES Opettaja(id),
     kuvaus varchar(400),

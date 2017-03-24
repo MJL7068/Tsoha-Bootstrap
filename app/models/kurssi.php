@@ -38,4 +38,19 @@ class Kurssi extends BaseModel{
             return $kurssi;
         }
     }
+
+    public static function haeNimenPerusteella($nimi) {
+        $query = DB::connection()->prepare('SELECT * FROM Kurssi WHERE nimi = :nimi LIMIT 1');
+        $query->execute(array('nimi' => $nimi));
+        $row = $query->fetch();
+
+        if ($row) {
+            $kurssi = new Kurssi(array(
+                'id' => $row['id'],
+                'nimi' => $row['nimi']
+            ));
+
+            return $kurssi;
+        }
+    }
 }

@@ -6,15 +6,13 @@
   <table class="table">
     <thead>
       <tr>
-        <th>Kurssi</th>
         <th>Nimi</th>
       </tr>
     </thead>
     <tbody>
-      {% for aihe in aiheet %}
+      {% for suoritus in suoritukset %}
       <tr>
-        <td>Tietokantasovellus</td>
-        <td>Drinkkikirjasto</td>
+        <td><a href="{{base_path}}/suoritus/{{suoritus.id}}">{{suoritus.nimi}}</a></td>
       </tr>
       {% endfor %}
     </tbody>

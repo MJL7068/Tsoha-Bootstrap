@@ -8,4 +8,7 @@ INSERT INTO Kurssi (nimi) VALUES ('Tietoliikenne');
 INSERT INTO Kurssi (nimi) VALUES ('Tietorakenteet');
 INSERT INTO Aihe (nimi, vaikeustaso, maksimiarvosana, kurssi, kuvaus) VALUES ('Drinkkikirjasto', 'keskitasoa', 5, 1, ' Tehtävänä on laatia www-sivulla toimiva drinkinhakulomake.');
 INSERT INTO Aihe (nimi, vaikeustaso, maksimiarvosana, kurssi, kuvaus) VALUES ('Laivanupotus', 'helppo', 4, 2, 'Tämän harjoitustyön aiheena on ohjelmoida laivanupotus');
-INSERT INTO Suoritus (aihe, tekija, ohjaaja, kuvaus, tyomaara, arvosana) VALUES (1, 1, 1, 'Tämän harjoitustyön aiheena on drinkkikirjasto.', 25, 5);
+INSERT INTO Aihe (nimi, vaikeustaso, maksimiarvosana, kurssi, kuvaus) VALUES ('Huutokauppa', 'vaikea', 5, 1, 'Huutokauppakamari Verkkodiili haluaa rakentaa huutokauppajärjestelmän, jonka avulla se voi kaupata tuotteita verkossa.');
+INSERT INTO Suoritus (aihe, nimi, tekija, ohjaaja, kuvaus, tyomaara, arvosana) VALUES (1, 'Drinkittäjä', 1, 1, 'Tämän harjoitustyön aiheena on drinkkikirjasto.', 25, 5);
+INSERT INTO Suoritus (aihe, nimi, tekija, ohjaaja, kuvaus, tyomaara, arvosana) VALUES (2, 'Upotus', 1, 2, 'Ohjelmoin laivanupotuspelin.', 15, 4);
+INSERT INTO Suoritus (aihe, nimi, tekija, ohjaaja, kuvaus, tyomaara, arvosana) VALUES (3, 'Huutokamari', 2, 2, 'Ohjelmoin huutokauppasovelluksen.', 32, 5);

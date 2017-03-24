@@ -1,7 +1,7 @@
 <?php
 
 class Suoritus extends BaseModel{
-    public $id, $aihe, $tekija, $ohjaaja, $kuvaus, $tyomaara, $arvosana;
+    public $id, $aihe, $nimi, $tekija, $ohjaaja, $kuvaus, $tyomaara, $arvosana;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -18,6 +18,7 @@ class Suoritus extends BaseModel{
             $suoritukset[] = new Suoritus(array(
                 'id' => $row['id'],
                 'aihe' => $row['aihe'],
+                'nimi' => $row['nimi'],
                 'tekija' => $row['tekija'],
                 'ohjaaja' => $row['ohjaaja'],                
                 'kuvaus' => $row['kuvaus'],
@@ -30,7 +31,7 @@ class Suoritus extends BaseModel{
     }
 
     public static function find($id) {
-        $query = DB::connection()->prepare('SELECT * FROM Suoritus WHERE id = :id LIMIT 1');
+        $query = DB::connection()->prepare('SELECT * FROM Suoritus WHERE id = :id');
         $query->execute(array('id' => $id));
         $row = $query->fetch();
 
@@ -38,6 +39,7 @@ class Suoritus extends BaseModel{
             $suoritus = new Suoritus(array(
                 'id' => $row['id'],
                 'aihe' => $row['aihe'],
+                'nimi' => $row['nimi'],
                 'tekija' => $row['tekija'],
                 'ohjaaja' => $row['ohjaaja'],                
                 'kuvaus' => $row['kuvaus'],
@@ -49,8 +51,16 @@ class Suoritus extends BaseModel{
         }
     }
 
+    public function tallenna() {
+        $query = DB::connection()->prepare('INSERT INTO Suoritus (aihe, nimi, tekija, ohjaaja, kuvaus, tyomaara, arvosana) VALUES (:aihe, :nimi, :tekija, :ohjaaja, :kuvaus, :tyomaara, :arvosana) RETURNING ID');
+        $query->execute(array('aihe' => $this->aihe 'nimi' => $this->nimi, 'tekija' => $this->tekija, 'ohjaaja' => $this->ohjaaja, 'kuvaus' => $this->kuvaus, 'tyomaara' => $this->tyomaara, 'arvosana' => $this->arvosana));
+
+        $row = $query->fetch();
+        $this->id = $row['id'];
+    }
+
     public static function haeSuorituksetTekijanMukaan($id) {
-        $query = DB::connection()->prepare('SELECT * FROM Suoritus WHERE tekija = :id LIMIT 1');
+        $query = DB::connection()->prepare('SELECT * FROM Suoritus WHERE tekija = :id');
         $query->execute(array('id' => $id));
 
         $rows = $query->fetchAll();
@@ -60,6 +70,7 @@ class Suoritus extends BaseModel{
             $suoritukset[] = new Suoritus(array(
                 'id' => $row['id'],
                 'aihe' => $row['aihe'],
+                'nimi' => $row['nimi'],
                 'tekija' => $row['tekija'],
                 'ohjaaja' => $row['ohjaaja'],                
                 'kuvaus' => $row['kuvaus'],
@@ -72,7 +83,7 @@ class Suoritus extends BaseModel{
     }
 
     public static function haeSuorituksetOhjaajanMukaan($id) {
-        $query = DB::connection()->prepare('SELECT * FROM Suoritus WHERE ohjaaja = :id LIMIT 1');
+        $query = DB::connection()->prepare('SELECT * FROM Suoritus WHERE ohjaaja = :id');
         $query->execute(array('id' => $id));
 
         $rows = $query->fetchAll();
@@ -82,6 +93,7 @@ class Suoritus extends BaseModel{
             $suoritukset[] = new Suoritus(array(
                 'id' => $row['id'],
                 'aihe' => $row['aihe'],
+                'nimi' => $row['nimi'],
                 'tekija' => $row['tekija'],
                 'ohjaaja' => $row['ohjaaja'],                
                 'kuvaus' => $row['kuvaus'],
@@ -94,7 +106,7 @@ class Suoritus extends BaseModel{
     }
 
     public static function haeSuorituksetAiheenMukaan($id) {
-        $query = DB::connection()->prepare('SELECT * FROM Suoritus WHERE aihe = :id LIMIT 1');
+        $query = DB::connection()->prepare('SELECT * FROM Suoritus WHERE aihe = :id');
         $query->execute(array('id' => $id));
 
         $rows = $query->fetchAll();
@@ -104,6 +116,7 @@ class Suoritus extends BaseModel{
             $suoritukset[] = new Suoritus(array(
                 'id' => $row['id'],
                 'aihe' => $row['aihe'],
+                'nimi' => $row['nimi'],
                 'tekija' => $row['tekija'],
                 'ohjaaja' => $row['ohjaaja'],                
                 'kuvaus' => $row['kuvaus'],

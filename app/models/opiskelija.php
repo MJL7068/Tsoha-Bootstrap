@@ -40,4 +40,20 @@ class Opiskelija extends BaseModel{
             return $opiskelija;
         }
     }
+
+    public static function haeNimenPerusteella($nimi) {
+        $query = DB::connection()->prepare('SELECT * FROM Opiskelija WHERE nimi = :nimi LIMIT 1');
+        $query->execute(array('nimi' => $nimi));
+        $row = $query->fetch();
+
+        if ($row) {
+            $opiskelija = new Opiskelija(array(
+                'id' => $row['id'],
+                'nimi' => $row['nimi'],
+                'opiskelijanumero' => $row['opiskelijanumero']
+            ));
+
+            return $opiskelija;
+        }
+    }
 }

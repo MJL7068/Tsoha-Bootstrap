@@ -28,6 +28,8 @@
 	  
 	  Kint::dump($kurssi);
 	  Kint::dump($kurssit);
+
+    Kint::dump(Suoritus::haeSuorituksetOhjaajanMukaan(2));
     }
 
     public static function aihe_lista() {

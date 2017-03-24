@@ -14,4 +14,28 @@ class AiheetController extends BaseController {
 		
 		View::make('suunnitelmat/aihe_esittely.html', array('aihe' => $aihe, 'suoritukset' => $suoritukset));
 	}
+
+    public static function uusi_kaavio() {
+        $kurssit = Kurssi::all();
+
+        View::make('suunnitelmat/aihe_uusi.html', array('kurssit' => $kurssit));
+    }
+
+    public static function tallenna() {
+        $params = $_POST;
+
+        $kurssi = Kurssi::haeNimenPerusteella($params['kurssi']);
+
+        $aihe = new Aihe(array(
+            'nimi' => $params['nimi'],
+            'vaikeustaso' => $params['vaikeustaso'],
+            'maksimiarvosana' => $params['maksimiarvosana'],
+            'kurssi' => $kurssi->id,
+            'kuvaus' => $params['kuvaus']
+        ));
+
+        $aihe->tallenna();
+
+        Redirect::to('/aihe/' . $aihe->id, array('message' => 'Aihe lisätty tietokantaan.'));
+    }
 }

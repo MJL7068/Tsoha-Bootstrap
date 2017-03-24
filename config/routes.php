@@ -8,6 +8,22 @@
     AiheetController::aihe_lista();
   });
 
+  $routes->post('/aihe', function() {
+    AiheetController::tallenna();
+  });
+
+  $routes->get('/aihe/uusi', function() {
+    AiheetController::uusi_kaavio();
+  });
+
+  $routes->post('/suoritus', function() {
+    SuoritusController::tallenna();
+  });
+
+  $routes->get('/suoritus/uusi', function() {
+    SuoritusController::uusi_suoritus();
+  });
+
   $routes->get('/kurssit', function() {
     KurssitController::kurssit();
   });
@@ -27,7 +43,11 @@
   $routes->get('/aihemuokkaus', function() {
     HelloWorldController::aihe_muokkaus();
   });
-  
+
+ /* $routes->get('/aiheuusi', function() {
+    AiheetController::uusi_kaavio();
+  });
+  */
   $routes->get('/suoritus/:id', function($id) {
     SuoritusController::show($id);
   });
