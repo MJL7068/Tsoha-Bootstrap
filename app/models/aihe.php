@@ -94,4 +94,14 @@ class Aihe extends BaseModel{
         $row = $query->fetch();
         $this->id = $row['id'];
     }
+
+    public static function poista($id) {
+        $query = DB::connection()->prepare('DELETE FROM Aihe WHERE id = :id');
+        $query->execute(array('id' => $id));
+    }
+
+    public static function update() {
+        $query = DB::connection()->prepare();
+        $quer->execute();
+    }
 }

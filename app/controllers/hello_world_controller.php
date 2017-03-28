@@ -31,7 +31,8 @@
 
     Kint::dump(Suoritus::haeSuorituksetOhjaajanMukaan(2));
 
-    Kint::dump(Aihe::haeNimenPerusteella('Laivanupotus'));
+    $suoritus2 = new Suoritus(array('id' => 22));
+    Kint::dump($suoritus2);
     }
 
     public static function aihe_lista() {

@@ -13,4 +13,8 @@
   <p>
     {{suoritus.kuvaus}}
   </p>
+
+  <form method="post" action="{{base_path}}/suoritus/{{suoritus.id}}/poista" style="display: inline-block;">
+  <button type="submit" class="btn btn-danger">Poista</button>
+  </form>
 {% endblock %}

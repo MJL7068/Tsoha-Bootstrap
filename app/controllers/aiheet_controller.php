@@ -38,4 +38,37 @@ class AiheetController extends BaseController {
 
         Redirect::to('/aihe/' . $aihe->id, array('message' => 'Aihe lisätty tietokantaan.'));
     }
+
+    public static function edit($id) {
+        $aihe = Aihe::find($id);
+        $kurssi = Kurssi::find($aihe->kurssi);
+
+        View::make('suunnitelmat/aihe_edit.html', array('aihe' => $aihe, 'kurssi' => $kurssi));
+    }
+
+    public static function update($id) {
+        $params = $_POST;
+
+        $kurssi = Kurssi::haeNimenPerusteella($params['kurssi']);
+
+        $attributes = array(
+            'id' => $id,
+            'nimi' => $params['nimi'],
+            'vaikeustaso' => $params['vaikeustaso'],
+            'maksimiarvosana' => $params['maksimiarvosana'],  
+            'kurssi' => $kurssi->id,  
+            'kuvaus' => $params['kuvaus']
+        );
+
+        $aihe = new Aihe($attributes);
+        $aihe->update();
+
+        Redirect::to('/' . $aihe->id, array('message' => 'Suoritusta muokattu onnistuneesti.'));
+    }
+
+    public static function poista($id) {
+        Aihe::poista($id);
+
+        Redirect::to('/', array('message' => 'Suoritus poistettu onnistunueesti.'));
+    }
 }

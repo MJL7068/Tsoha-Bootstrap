@@ -11,6 +11,10 @@
   <p>
     {{aihe.kuvaus}}
       </p>
+
+  <form method="post" action="{{base_path}}/aihe/{{aihe.id}}/poista" style="display: inline-block;">
+    <button type="submit" class="btn btn-danger">Poista</button>
+  </form>
 	  
 	<h2>Suoritukset</h2>
 	<table class="table">

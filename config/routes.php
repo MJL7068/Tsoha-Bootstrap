@@ -63,17 +63,33 @@
   $routes->get('/aihe/:id', function($id) {
     AiheetController::show($id);
   });
-  
-  $routes->get('/aihemuokkaus', function() {
-    HelloWorldController::aihe_muokkaus();
+
+  $routes->get('/aihe/:id/edit', function($id){
+    AiheetController::edit($id);
+  });
+
+  $routes->post('/aihe/:id/edit', function($id) {
+    AiheetController::update($id);
+  });
+
+  $routes->post('/aihe/:id/poista', function($id) {
+    AiheetController::poista($id);
   });
 
   $routes->get('/suoritus/:id', function($id) {
     SuoritusController::show($id);
   });
 
-  $routes->get('/suoritusmuokkaus', function() {
-    HelloWorldController::suoritus_muokkaus();
+  $routes->get('/suoritus/:id/edit', function($id){
+    SuoritusController::edit($id);
+  });
+
+  $routes->post('/suoritus/:id/edit', function($id) {
+    SuoritusController::update($id);
+  });
+
+  $routes->post('/suoritus/:id/poista', function($id) {
+    SuoritusController::poista($id);
   });
   
   $routes->get('/login', function() {

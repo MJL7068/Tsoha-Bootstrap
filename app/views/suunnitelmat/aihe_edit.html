@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Muokkaa aihetta</h1>
+
+  <h2>{{aihe.nimi}}</h2>
+  <form method="post" action="{{base_path}}/aihe/{{aihe.id}}/edit">
+    <div class="form-group">
+      <label>Nimi</label>
+      <input name="nimi" class="form-control" value="{{aihe.nimi}}" type="text">
+    </div>
+    <div class="form-group">
+      <label>Aihe</label>
+      <input name="vaikeustaso" class="form-control" value="{{aihe.vaikeustaso}}" type="text">
+    </div>
+    <div class="form-group">
+      <label>Tekijä</label>
+      <input name="maksimiarvosana" class="form-control" value="{{aihe.maksimiarvosana}}" type="text">
+    </div>
+    <div class="form-group">
+      <label>Ohjaaja</label>
+      <input name="kurssi" class="form-control" value="{{kurssi.nimi}}" type="text">
+    </div>
+    <div class="form-group">
+      <label>Kuvaus</label>
+      <textarea name="kuvaus" class="form-control">{{aihe.kuvaus}}
+      </textarea>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Tallenna</button>
+    </div>
+  </form>
+{% endblock %}

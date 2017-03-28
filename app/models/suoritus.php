@@ -127,4 +127,14 @@ class Suoritus extends BaseModel{
 
         return $suoritukset;
     }
+
+    public static function poista($id) {
+        $query = DB::connection()->prepare('DELETE FROM Suoritus WHERE id = :id');
+        $query->execute(array('id' => $id));
+    }
+
+    public static function update() {
+        $query = DB::connection()->prepare('UPDATE Suoritus SET ');
+        $query->execute();
+    }
 }
