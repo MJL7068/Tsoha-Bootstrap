@@ -14,4 +14,20 @@ class KurssitController extends BaseController {
 
         View::make('suunnitelmat/kurssi_esittely.html', array('kurssi' => $kurssi, 'aiheet' => $aiheet));
     }
+
+    public static function uusi_kurssi() {
+        View::make('suunnitelmat/kurssi_uusi.html');
+    }
+
+    public static function tallenna() {
+        $params = $_POST;
+
+        $kurssi = new Kurssi(array(
+            'nimi' => $params['nimi']
+        ));
+
+        $kurssi->tallenna();
+
+        Redirect::to('/kurssi/' . $kurssi->id, array('message' => 'Kurssi lisätty tietokantaan.'));
+    }
 }

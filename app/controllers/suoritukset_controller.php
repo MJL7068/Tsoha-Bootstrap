@@ -27,14 +27,13 @@ class SuoritusController extends BaseController {
         $opettaja = Opettaja::haeNimenPerusteella($params['ohjaaja']);
 
         $suoritus = new Suoritus(array(
-            'id' => $row['id'],
             'aihe' => $aihe->id,
-            'nimi' => $row['nimi'],
+            'nimi' => $params['nimi'],
             'tekija' => $opiskelija->id,
             'ohjaaja' => $opettaja->id,                
-            'kuvaus' => $row['kuvaus'],
-			'tyomaara' => $row['tyomaara'],
-			'arvosana' => $row['arvosana']
+            'kuvaus' => $params['kuvaus'],
+			'tyomaara' => $params['tyomaara'],
+			'arvosana' => $params['arvosana']
         ));
 
         $suoritus->tallenna();

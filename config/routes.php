@@ -24,6 +24,30 @@
     SuoritusController::uusi_suoritus();
   });
 
+  $routes->post('/opettaja', function() {
+    OpettajaController::tallenna();
+  });
+
+  $routes->get('/opettaja/uusi', function() {
+    OpettajaController::uusi_opettaja();
+  });
+
+  $routes->post('/opiskelija', function() {
+    OpiskelijaController::tallenna();
+  });
+
+  $routes->get('/opiskelija/uusi', function() {
+    OpiskelijaController::uusi_opiskelija();
+  });
+
+  $routes->post('/kurssi', function() {
+    KurssitController::tallenna();
+  });
+
+  $routes->get('/kurssi/uusi', function() {
+    KurssitController::uusi_kurssi();
+  });
+
   $routes->get('/kurssit', function() {
     KurssitController::kurssit();
   });
@@ -44,10 +68,6 @@
     HelloWorldController::aihe_muokkaus();
   });
 
- /* $routes->get('/aiheuusi', function() {
-    AiheetController::uusi_kaavio();
-  });
-  */
   $routes->get('/suoritus/:id', function($id) {
     SuoritusController::show($id);
   });

@@ -53,4 +53,12 @@ class Opettaja extends BaseModel {
             return $opettaja;
         }
     }
+
+    public function tallenna() {
+        $query = DB::connection()->prepare('INSERT INTO Opettaja (nimi) VALUES (:nimi) RETURNING ID');
+        $query->execute(array('nimi' => $this->nimi));
+
+        $row = $query->fetch();
+        $this->id = $row['id'];
+    }
 }

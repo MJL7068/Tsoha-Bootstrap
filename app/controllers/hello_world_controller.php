@@ -30,6 +30,8 @@
 	  Kint::dump($kurssit);
 
     Kint::dump(Suoritus::haeSuorituksetOhjaajanMukaan(2));
+
+    Kint::dump(Aihe::haeNimenPerusteella('Laivanupotus'));
     }
 
     public static function aihe_lista() {

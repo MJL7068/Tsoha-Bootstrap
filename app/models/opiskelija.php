@@ -56,4 +56,12 @@ class Opiskelija extends BaseModel{
             return $opiskelija;
         }
     }
+
+    public function tallenna() {
+        $query = DB::connection()->prepare('INSERT INTO Opiskelija (nimi, opiskelijanumero) VALUES (:nimi, :opiskelijanumero) RETURNING ID');
+        $query->execute(array('nimi' => $this->nimi, 'opiskelijanumero' => $this->opiskelijanumero));
+
+        $row = $query->fetch();
+        $this->id = $row['id'];
+    }
 }

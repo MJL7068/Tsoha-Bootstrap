@@ -69,7 +69,7 @@ class Aihe extends BaseModel{
     }
 
     public static function haeNimenPerusteella($nimi) {
-        $query = DB::connection()->prepare('SELECT * FROM Opettaja WHERE nimi = :nimi LIMIT 1');
+        $query = DB::connection()->prepare('SELECT * FROM Aihe WHERE nimi = :nimi LIMIT 1');
         $query->execute(array('nimi' => $nimi));
         $row = $query->fetch();
 

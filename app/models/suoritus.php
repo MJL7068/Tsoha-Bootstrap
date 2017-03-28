@@ -52,11 +52,11 @@ class Suoritus extends BaseModel{
     }
 
     public function tallenna() {
-     /*   $query = DB::connection()->prepare('INSERT INTO Suoritus (aihe, nimi, tekija, ohjaaja, kuvaus, tyomaara, arvosana) VALUES (:aihe, :nimi, :tekija, :ohjaaja, :kuvaus, :tyomaara, :arvosana) RETURNING ID');
-        $query->execute(array('aihe' => $this->aihe 'nimi' => $this->nimi, 'tekija' => $this->tekija, 'ohjaaja' => $this->ohjaaja, 'kuvaus' => $this->kuvaus, 'tyomaara' => $this->tyomaara, 'arvosana' => $this->arvosana));
-
+        $query = DB::connection()->prepare('INSERT INTO Suoritus (aihe, nimi, tekija, ohjaaja, kuvaus, tyomaara, arvosana) VALUES (:aihe, :nimi, :tekija, :ohjaaja, :kuvaus, :tyomaara, :arvosana) RETURNING id');
+        $query->execute(array('aihe' => $this->aihe, 'nimi' => $this->nimi, 'tekija' => $this->tekija, 'ohjaaja' => $this->ohjaaja, 'kuvaus' => $this->kuvaus, 'tyomaara' => $this->tyomaara, 'arvosana' => $this->arvosana));
         $row = $query->fetch();
-        $this->id = $row['id'];  */
+
+        $this->id = $row['id'];
     }
 
     public static function haeSuorituksetTekijanMukaan($id) {
