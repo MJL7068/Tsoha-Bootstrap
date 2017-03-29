@@ -63,7 +63,7 @@ class AiheetController extends BaseController {
         $aihe = new Aihe($attributes);
         $aihe->update();
 
-        Redirect::to('/' . $aihe->id, array('message' => 'Suoritusta muokattu onnistuneesti.'));
+        Redirect::to('/aihe/' . $aihe->id, array('message' => 'Suoritusta muokattu onnistuneesti.'));
     }
 
     public static function poista($id) {

@@ -100,8 +100,8 @@ class Aihe extends BaseModel{
         $query->execute(array('id' => $id));
     }
 
-    public static function update() {
-        $query = DB::connection()->prepare();
-        $quer->execute();
+    public function update() {
+        $query = DB::connection()->prepare('UPDATE Aihe SET nimi = :nimi, vaikeustaso = :vaikeustaso, maksimiarvosana = :maksimiarvosana, kurssi = :kurssi, kuvaus = :kuvaus WHERE id = :id');
+        $query->execute(array('nimi' => $this->nimi, 'vaikeustaso' => $this->vaikeustaso, 'maksimiarvosana' => $this->maksimiarvosana, 'kurssi' => $this->kurssi, 'kuvaus' => $this->kuvaus, 'id' => $this->id));
     }
 }

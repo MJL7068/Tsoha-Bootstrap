@@ -133,8 +133,9 @@ class Suoritus extends BaseModel{
         $query->execute(array('id' => $id));
     }
 
-    public static function update() {
-        $query = DB::connection()->prepare('UPDATE Suoritus SET ');
-        $query->execute();
+    public function update() {
+        $query = DB::connection()->prepare('UPDATE Suoritus SET aihe = :aihe, nimi = :nimi, tekija = :tekija, ohjaaja = :ohjaaja, kuvaus = :kuvaus, tyomaara = :tyomaara, arvosana = :arvosana WHERE id = :id');
+        $query->execute(array('aihe' => $this->aihe, 'nimi' => $this->nimi, 'tekija' => $this->tekija, 'ohjaaja' => $this->ohjaaja, 'kuvaus' => $this->kuvaus, 'tyomaara' => $this->tyomaara, 'arvosana' => $this->arvosana, 'id' => $this->id));
+        $query->fetch();
     }
 }
