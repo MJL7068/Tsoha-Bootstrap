@@ -26,4 +26,12 @@ Projekti toteutetaan laitoksen users-palvelimella käyttäen php-ohjelmointikiel
 
 [Opettajan esittelysivu](http://matleino.users.cs.helsinki.fi/projekti/opettaja/1). Sivulla näkyy opettajan ohjaamat harjoitustyöt.
 
-[Kirjautumissivu](http://matleino.users.cs.helsinki.fi/projekti/login).
+[Aiheen lisäyssivu](http://matleino.users.cs.helsinki.fi/projekti/aihe/uusi)
+
+[Suorituksen lisäyssivu](http://matleino.users.cs.helsinki.fi/projekti/suoritus/uusi)
+
+[Opettajan lisäyssivu](http://matleino.users.cs.helsinki.fi/projekti/opettaja/uusi)
+
+[Opiskelijan lisäyssivu](http://matleino.users.cs.helsinki.fi/projekti/opiskelija/uusi)
+
+[Kirjautumissivu](http://matleino.users.cs.helsinki.fi/projekti/login)
