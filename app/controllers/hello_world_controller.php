@@ -31,8 +31,12 @@
 
     Kint::dump(Suoritus::haeSuorituksetOhjaajanMukaan(2));
 
-    $suoritus2 = new Suoritus(array('id' => 22));
-    Kint::dump($suoritus2);
+    $ville = new Opiskelija(array(
+      'nimi' => 'vi',
+      'opiskelijanumero' => '014412354'
+    ));
+    $errors = $ville->errors();
+    Kint::dump($errors);
     }
 
     public static function aihe_lista() {

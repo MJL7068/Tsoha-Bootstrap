@@ -91,10 +91,6 @@
   $routes->post('/suoritus/:id/poista', function($id) {
     SuoritusController::poista($id);
   });
-  
-  $routes->get('/login', function() {
-    HelloWorldController::login();
-  });
 
   $routes->get('/opiskelija/:id', function($id) {
     OpiskelijaController::show($id);
@@ -106,4 +102,12 @@
 
   $routes->get('/haku', function() {
     HelloWorldController::haku();
+  });
+
+  $routes->get('/login', function(){
+    KayttajaController::login();
+  });
+
+  $routes->post('/login', function(){
+    KayttajaController::handle_login();
   });

@@ -5,6 +5,8 @@ class Aihe extends BaseModel{
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+
+        $this->validators = array('validate_name', 'validate_description');
     }
 
     public static function all() {
@@ -103,5 +105,29 @@ class Aihe extends BaseModel{
     public function update() {
         $query = DB::connection()->prepare('UPDATE Aihe SET nimi = :nimi, vaikeustaso = :vaikeustaso, maksimiarvosana = :maksimiarvosana, kurssi = :kurssi, kuvaus = :kuvaus WHERE id = :id');
         $query->execute(array('nimi' => $this->nimi, 'vaikeustaso' => $this->vaikeustaso, 'maksimiarvosana' => $this->maksimiarvosana, 'kurssi' => $this->kurssi, 'kuvaus' => $this->kuvaus, 'id' => $this->id));
+    }
+
+    public function validate_name() {
+        $errors = array();
+
+        if ($this->nimi == '' || $this->nimi == null) {
+            $errors[] = 'Nimi ei saa olla tyhjä!';
+        }
+
+        if (strlen($this->nimi) < 3) {
+            $errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
+        }
+
+        return $errors;
+    }
+
+    public function validate_description() {
+        $errors = array();
+
+        if ($this->nimi == '' || $this->nimi == null) {
+            $errors[] = 'Kuvaus ei saa olla tyhjä!';
+        }
+
+        return $errors;
     }
 }

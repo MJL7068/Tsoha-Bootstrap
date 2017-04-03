@@ -5,6 +5,8 @@ class Suoritus extends BaseModel{
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+
+        $this->validators = array('validate_name', 'validate_description', 'validate_effort');
     }
 
     public static function all() {
@@ -137,5 +139,47 @@ class Suoritus extends BaseModel{
         $query = DB::connection()->prepare('UPDATE Suoritus SET aihe = :aihe, nimi = :nimi, tekija = :tekija, ohjaaja = :ohjaaja, kuvaus = :kuvaus, tyomaara = :tyomaara, arvosana = :arvosana WHERE id = :id');
         $query->execute(array('aihe' => $this->aihe, 'nimi' => $this->nimi, 'tekija' => $this->tekija, 'ohjaaja' => $this->ohjaaja, 'kuvaus' => $this->kuvaus, 'tyomaara' => $this->tyomaara, 'arvosana' => $this->arvosana, 'id' => $this->id));
         $query->fetch();
+    }
+
+    public function validate_name() {
+        $errors = array();
+
+        if ($this->nimi == '' || $this->nimi == null) {
+            $errors[] = 'Nimi ei saa olla tyhjä!';
+        }
+
+        if (strlen($this->nimi) < 3) {
+            $errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
+        }
+
+        return $errors;
+    }
+
+    public function validate_description() {
+        $errors = array();
+
+        if ($this->nimi == '' || $this->nimi == null) {
+            $errors[] = 'Kuvaus ei saa olla tyhjä!';
+        }
+
+        return $errors;
+    }
+
+    public function validate_effort() {
+        $errors = array();
+
+        if (!is_numeric($this->tyomaara)) {
+            $errors[] = 'Annetun työmäärän pitää olla numero!';
+        }
+
+        if ($this->tyomaara < 0) {
+            $errors[] = 'Työmäärä ei saa olla negatiivinen!';
+        }
+
+        if ($this->tyomaara > 20000) {
+            $errors[] = 'Annettu työmäärä liian suuri!';
+        }
+
+        return $errors;
     }
 }

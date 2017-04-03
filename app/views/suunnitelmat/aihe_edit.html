@@ -13,11 +13,23 @@
       <input name="vaikeustaso" class="form-control" value="{{aihe.vaikeustaso}}" type="text">
     </div>
     <div class="form-group">
-      <label>Tekijä</label>
-      <input name="maksimiarvosana" class="form-control" value="{{aihe.maksimiarvosana}}" type="text">
+      <label>Maksimiarvosana</label>
+      <!-- <input name="maksimiarvosana" class="form-control" value="{{aihe.maksimiarvosana}}" type="text"> -->
+      
+      {% block maksimi %}
+      {% set arvosana = "3" %}
+      <select name="maksimiarvosana", class="form-control" type="text">
+        <option {%- if "1" == arvosana -%} selected {%- endif -%}>1</option>
+        <option {%- if "2" == arvosana -%} selected {%- endif -%}>2</option>
+        <option {%- if "3" == arvosana -%} selected {%- endif -%}>3</option>
+        <option {%- if "4" == arvosana -%} selected {%- endif -%}>4</option>
+        <option {%- if "5" == arvosana -%} selected {%- endif -%}>5</option>
+       </select>
+       {% endblock %}
+
     </div>
     <div class="form-group">
-      <label>Ohjaaja</label>
+      <label>Kurssi</label>
       <input name="kurssi" class="form-control" value="{{kurssi.nimi}}" type="text">
     </div>
     <div class="form-group">

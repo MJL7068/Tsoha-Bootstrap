@@ -5,6 +5,8 @@ class Opiskelija extends BaseModel{
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+
+        $this->validators = array('validate_name', 'validate_student_number');
     }
 
     public static function all() {
@@ -63,5 +65,29 @@ class Opiskelija extends BaseModel{
 
         $row = $query->fetch();
         $this->id = $row['id'];
+    }
+
+    public function validate_name() {
+        $errors = array();
+
+        if ($this->nimi == '' || $this->nimi == null) {
+            $errors[] = 'Nimi ei saa olla tyhjä!';
+        }
+
+        if (strlen($this->nimi) < 3) {
+            $errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
+        }
+
+        return $errors;
+    }
+
+    public function validate_student_number() {
+        $errors = array();
+
+        if (!preg_match("[1-9]{9}", $this->opiskelinumero)) {
+            $errors[] = 'Opiskelinumeron tulee olla yhdeksän numeron mittainen!';
+        }
+
+        return $errors;
     }
 }

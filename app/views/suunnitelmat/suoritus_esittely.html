@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+{% import "macros/forms.html" as forms %}
   <h1>{{suoritus.nimi}}</h1>
 
   <ul>
@@ -13,8 +14,6 @@
   <p>
     {{suoritus.kuvaus}}
   </p>
-
-  <form method="post" action="{{base_path}}/suoritus/{{suoritus.id}}/poista" style="display: inline-block;">
-  <button type="submit" class="btn btn-danger">Poista</button>
-  </form>
+  {{forms.destroy_button("#{base_path}/suoritus/#{suoritus.id}/poista")}}
+  <a href="{{base_path}}/suoritus/{{suoritus.id}}/edit" class="btn btn-default">Muokkaa</a>
 {% endblock %}
