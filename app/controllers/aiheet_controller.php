@@ -10,10 +10,11 @@ class AiheetController extends BaseController {
 
     public static function show($id) {
         $aihe = Aihe::find($id);
+        $kurssi = Kurssi::find($aihe->kurssi);
         $data = array('lukumaara' => Suoritus::laskeSuoritustenLukumaaraAiheenMukaan($id), 'keskiarvo' => Suoritus::laskeSuoritustenArvosanojenKeskiarvo($id), 'matalin' => Suoritus::haeMatalinArvosanaAiheenMukaan($id), 'korkein' => Suoritus::haeKorkeinArvosanaAiheenMukaan($id));
         $suoritukset = Suoritus::haeSuorituksetAiheenMukaan($id);
 
-        View::make('suunnitelmat/aihe_esittely.html', array('aihe' => $aihe, 'suoritukset' => $suoritukset, 'data' => $data));
+        View::make('suunnitelmat/aihe_esittely.html', array('aihe' => $aihe, 'suoritukset' => $suoritukset, 'kurssi' => $kurssi, 'data' => $data));
     }
 
     public static function uusi_kaavio() {
@@ -54,8 +55,9 @@ class AiheetController extends BaseController {
 
         $aihe = Aihe::find($id);
         $kurssi = Kurssi::find($aihe->kurssi);
+        $kurssit = Kurssi::all();
 
-        View::make('suunnitelmat/aihe_edit.html', array('aihe' => $aihe, 'kurssi' => $kurssi));
+        View::make('suunnitelmat/aihe_edit.html', array('aihe' => $aihe, 'kurssi' => $kurssi, 'kurssit' => $kurssit));
     }
 
     public static function update($id) {

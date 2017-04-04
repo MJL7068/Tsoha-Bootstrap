@@ -9,28 +9,34 @@
       <input name="nimi" class="form-control" value="{{aihe.nimi}}" type="text">
     </div>
     <div class="form-group">
-      <label>Aihe</label>
+      <label>Vaikeustaso</label>
       <input name="vaikeustaso" class="form-control" value="{{aihe.vaikeustaso}}" type="text">
+      
+      <label>Vaikeustaso</label>
+      <select name="vaikeustaso", class="form-control" type="text">
+        <option {% if "Helppo" == aihe.vaikeustaso %} selected {% endif %}>Helppo</option>
+        <option {% if "Keskitasoa" == aihe.vaikeustaso %} selected {% endif %}>Keskitasoa</option>
+        <option {% if "Vaikea" == aihe.vaikeustaso %} selected {% endif %}>Vaikea</option>
+       </select>
     </div>
     <div class="form-group">
-      <label>Maksimiarvosana</label>
-      <!-- <input name="maksimiarvosana" class="form-control" value="{{aihe.maksimiarvosana}}" type="text"> -->
-      
-      {% block maksimi %}
-      {% set arvosana = "3" %}
+      <label>Maksimiarvosana</label>  
       <select name="maksimiarvosana", class="form-control" type="text">
-        <option {%- if "1" == arvosana -%} selected {%- endif -%}>1</option>
-        <option {%- if "2" == arvosana -%} selected {%- endif -%}>2</option>
-        <option {%- if "3" == arvosana -%} selected {%- endif -%}>3</option>
-        <option {%- if "4" == arvosana -%} selected {%- endif -%}>4</option>
-        <option {%- if "5" == arvosana -%} selected {%- endif -%}>5</option>
+        <option {% if "1" == aihe.maksimiarvosana %} selected {% endif %}>1</option>
+        <option {% if "2" == aihe.maksimiarvosana %} selected {% endif %}>2</option>
+        <option {% if "3" == aihe.maksimiarvosana %} selected {% endif %}>3</option>
+        <option {% if "4" == aihe.maksimiarvosana %} selected {% endif %}>4</option>
+        <option {% if "5" == aihe.maksimiarvosana %} selected {% endif %}>5</option>
        </select>
-       {% endblock %}
-
     </div>
     <div class="form-group">
       <label>Kurssi</label>
       <input name="kurssi" class="form-control" value="{{kurssi.nimi}}" type="text">
+      <select name="kurssi", class="form-control" type="text">
+        {% for katsottavaKurssi in kurssit %}
+        <option {% if kurssi.nimi == katsottavaKurssi.nimi %} selected {% endif %}>{{katsottavaKurssi.nimi}}</option>
+        {% endfor %}
+       </select>
     </div>
     <div class="form-group">
       <label>Kuvaus</label>

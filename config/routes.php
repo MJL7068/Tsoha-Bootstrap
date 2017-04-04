@@ -112,6 +112,6 @@
     KayttajaController::handle_login();
   });
 
-  $routes->get('/logout', function(){
+  $routes->post('/logout', function(){
     KayttajaController::handle_logout();
   });
