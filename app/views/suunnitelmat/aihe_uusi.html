@@ -1,11 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
   <h1>Lisää uusi aihe tietokantaan</h1>
-
+  <ul>
+    {% for error in errors %}
+      <li>{{error}}</li>
+    {% endfor %}
+  </ul>
   <form method="post" action="{{base_path}}/aihe">
     <div class="form-group">
       <label>Nimi</label>
-      <input name="nimi" class="form-control" type="text">
+      <input name="nimi" class="form-control" type="text" value={{attributes.nimi}}>
     </div>
 
     <div class="form-group">
@@ -19,7 +23,6 @@
 
     <div class="form-group">
       <label>Vaikeustaso</label>
-      <input name="vaikeustaso" class="form-control" type="text">
       <select name="vaikeustaso", class="form-control" type="text">
         <option>Helppo</option>
         <option selected>Keskitasoa</option>
@@ -40,7 +43,7 @@
 
     <div class="form-group">
       <label>Kuvaus</label>
-      <textarea name="kuvaus" class="form-control"></textarea>
+      <textarea name="kuvaus" class="form-control">{{attributes.kuvaus}}</textarea>
     </div>
 
     <div class="form-group">

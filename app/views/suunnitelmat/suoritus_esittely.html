@@ -14,6 +14,9 @@
   <p>
     {{suoritus.kuvaus}}
   </p>
-  {{forms.destroy_button("#{base_path}/suoritus/#{suoritus.id}/poista")}}
-  <a href="{{base_path}}/suoritus/{{suoritus.id}}/edit" class="btn btn-default">Muokkaa</a>
+
+  {% if user_logged_in %}
+    {{forms.destroy_button("#{base_path}/suoritus/#{suoritus.id}/poista")}}
+    <a href="{{base_path}}/suoritus/{{suoritus.id}}/edit" class="btn btn-default">Muokkaa</a>
+  {% endif %}
 {% endblock %}

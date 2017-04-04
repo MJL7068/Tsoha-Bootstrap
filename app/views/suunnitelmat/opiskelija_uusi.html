@@ -1,16 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
   <h1>Lisää uuden opiskelijan tiedot tietokantaan</h1>
+  <ul>
+    {% for error in errors %}
+      <li>{{error}}</li>
+    {% endfor %}
+  </ul>
 
   <form method="post" action="{{base_path}}/opiskelija">
     <div class="form-group">
       <label>Nimi</label>
-      <input name="nimi" class="form-control" type="text">
+      <input name="nimi" class="form-control" type="text" value="{{attributes.nimi}}">
     </div>
 
     <div class="form-group">
       <label>Opiskelijanumero</label>
-      <input name="opiskelijanumero" class="form-control" type="text">
+      <input name="opiskelijanumero" class="form-control" type="text" value="{{attributes.opiskelijanumero}}">
     </div>
 
     <div class="form-group">

@@ -2,6 +2,8 @@
 
 class SuoritusController extends BaseController {
     public static function show($id) {
+        self::check_logged_in();
+
         $suoritus = Suoritus::find($id);
 
         $aihe = Aihe::find($suoritus->aihe);
@@ -12,6 +14,8 @@ class SuoritusController extends BaseController {
     }
 
     public static function uusi_suoritus() {
+        self::check_logged_in();
+
         $aiheet = Aihe::all();
         $opiskelijat = Opiskelija::all();
         $opettajat = Opettaja::all();
@@ -26,7 +30,7 @@ class SuoritusController extends BaseController {
         $opiskelija = Opiskelija::haeNimenPerusteella($params['tekija']);
         $opettaja = Opettaja::haeNimenPerusteella($params['ohjaaja']);
 
-        $suoritus = new Suoritus(array(
+        $attributes = array(
             'aihe' => $aihe->id,
             'nimi' => $params['nimi'],
             'tekija' => $opiskelija->id,
@@ -34,14 +38,27 @@ class SuoritusController extends BaseController {
             'kuvaus' => $params['kuvaus'],
 			'tyomaara' => $params['tyomaara'],
 			'arvosana' => $params['arvosana']
-        ));
+        );
 
-        $suoritus->tallenna();
+        $suoritus = new Suoritus($attributes);
+        $errors = $suoritus->errors();
 
-        Redirect::to('/suoritus/' . $suoritus->id, array('message' => 'Uusi suoritus lisätty tietokantaan.'));
+        if (count($errors) == 0) {
+            $suoritus->tallenna();
+
+            Redirect::to('/suoritus/' . $suoritus->id, array('message' => 'Uusi suoritus lisätty tietokantaan.'));
+        } else {
+            $aiheet = Aihe::all();
+            $opiskelijat = Opiskelija::all();
+            $opettajat = Opettaja::all();
+
+            View::make('suunnitelmat/suoritus_uusi.html', array('aiheet' => $aiheet, 'opiskelijat' => $opiskelijat, 'opettajat' => $opettajat, 'errors' => $errors, 'attributes' => $attributes));
+        }
     }
 
     public static function edit($id) {
+        self::check_logged_in();
+
         $suoritus = Suoritus::find($id);
         $aihe = Aihe::find($suoritus->aihe);
         $tekija = Opiskelija::find($suoritus->tekija);

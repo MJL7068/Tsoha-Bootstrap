@@ -110,12 +110,14 @@ class Aihe extends BaseModel{
     public function validate_name() {
         $errors = array();
 
-        if ($this->nimi == '' || $this->nimi == null) {
-            $errors[] = 'Nimi ei saa olla tyhjä!';
+        if($this->nimi == '' || $this->nimi == null){
+            //$errors[] = 'Nimi ei saa olla tyhjä!';
+            array_push($errors, 'Nimi ei saa olla tyhjä!');
         }
 
         if (strlen($this->nimi) < 3) {
-            $errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
+            //$errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
+            array_push($errors, 'Nimen pituuden tulee olla vähintään kolme merkkiä!');
         }
 
         return $errors;
@@ -125,7 +127,8 @@ class Aihe extends BaseModel{
         $errors = array();
 
         if ($this->nimi == '' || $this->nimi == null) {
-            $errors[] = 'Kuvaus ei saa olla tyhjä!';
+            //$errors[] = 'Kuvaus ei saa olla tyhjä!';
+            array_push($errors, 'Kuvaus ei saa olla tyhjä!');
         }
 
         return $errors;

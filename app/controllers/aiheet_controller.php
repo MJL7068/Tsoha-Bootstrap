@@ -18,6 +18,7 @@ class AiheetController extends BaseController {
     public static function uusi_kaavio() {
         $kurssit = Kurssi::all();
 
+        self::check_logged_in();
         View::make('suunnitelmat/aihe_uusi.html', array('kurssit' => $kurssit));
     }
 
@@ -26,20 +27,30 @@ class AiheetController extends BaseController {
 
         $kurssi = Kurssi::haeNimenPerusteella($params['kurssi']);
 
-        $aihe = new Aihe(array(
+        $attributes = array(
             'nimi' => $params['nimi'],
             'vaikeustaso' => $params['vaikeustaso'],
             'maksimiarvosana' => $params['maksimiarvosana'],
             'kurssi' => $kurssi->id,
             'kuvaus' => $params['kuvaus']
-        ));
+        );
 
-        $aihe->tallenna();
+        $aihe = new Aihe($attributes);
+        $errors = $aihe->errors();
 
-        Redirect::to('/aihe/' . $aihe->id, array('message' => 'Aihe lisätty tietokantaan.'));
+        if (count($errors) == 0) {
+            $aihe->tallenna();
+
+            Redirect::to('/aihe/' . $aihe->id, array('message' => 'Aihe lisätty tietokantaan.'));
+        } else {
+            $kurssit = Kurssi::all();
+            View::make('suunnitelmat/aihe_uusi.html', array('kurssit' => $kurssit, 'errors' => $errors, 'attributes' => $attributes));
+        }
     }
 
     public static function edit($id) {
+        self::check_logged_in();
+
         $aihe = Aihe::find($id);
         $kurssi = Kurssi::find($aihe->kurssi);
 

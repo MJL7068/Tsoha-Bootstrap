@@ -145,11 +145,13 @@ class Suoritus extends BaseModel{
         $errors = array();
 
         if ($this->nimi == '' || $this->nimi == null) {
-            $errors[] = 'Nimi ei saa olla tyhjä!';
+            //$errors[] = 'Nimi ei saa olla tyhjä!';
+            array_push($errors, 'Nimi ei saa olla tyhjä!');
         }
 
         if (strlen($this->nimi) < 3) {
-            $errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
+            //$errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
+            array_push($errors, 'Nimen pituuden tulee olla vähintään kolme merkkiä!');
         }
 
         return $errors;
@@ -159,7 +161,8 @@ class Suoritus extends BaseModel{
         $errors = array();
 
         if ($this->nimi == '' || $this->nimi == null) {
-            $errors[] = 'Kuvaus ei saa olla tyhjä!';
+            //$errors[] = 'Kuvaus ei saa olla tyhjä!';
+            array_push($errors, 'Kuvaus ei saa olla tyhjä!');
         }
 
         return $errors;
@@ -169,15 +172,18 @@ class Suoritus extends BaseModel{
         $errors = array();
 
         if (!is_numeric($this->tyomaara)) {
-            $errors[] = 'Annetun työmäärän pitää olla numero!';
+            //$errors[] = 'Annetun työmäärän pitää olla numero!';
+            array_push($errors, 'Annetun työmäärän pitää olla numero!');
         }
 
         if ($this->tyomaara < 0) {
-            $errors[] = 'Työmäärä ei saa olla negatiivinen!';
+            //$errors[] = 'Työmäärä ei saa olla negatiivinen!';
+            array_push($errors, 'Työmäärä ei saa olla negatiivinen!');
         }
 
         if ($this->tyomaara > 20000) {
-            $errors[] = 'Annettu työmäärä liian suuri!';
+            //$errors[] = 'Annettu työmäärä liian suuri!';
+            array_push($errors, 'Annettu työmäärä liian suuri!');
         }
 
         return $errors;

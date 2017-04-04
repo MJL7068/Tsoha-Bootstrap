@@ -16,6 +16,8 @@ class KurssitController extends BaseController {
     }
 
     public static function uusi_kurssi() {
+        self::check_logged_in();
+
         View::make('suunnitelmat/kurssi_uusi.html');
     }
 

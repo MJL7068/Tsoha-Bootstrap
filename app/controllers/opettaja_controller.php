@@ -2,6 +2,8 @@
 
 class OpettajaController extends BaseController {
     public static function show($id) {
+        self::check_logged_in();
+        
         $opettaja = Opettaja::find($id);
 
         $opettajanOhjaamatSuoritukset = Suoritus::haeSuorituksetOhjaajanMukaan($id);
@@ -10,6 +12,8 @@ class OpettajaController extends BaseController {
     }
 
     public static function uusi_opettaja() {
+        self::check_logged_in();
+
         View::make('suunnitelmat/opettaja_uusi.html');
     }
 

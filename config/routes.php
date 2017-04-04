@@ -111,3 +111,7 @@
   $routes->post('/login', function(){
     KayttajaController::handle_login();
   });
+
+  $routes->get('/logout', function(){
+    KayttajaController::handle_logout();
+  });

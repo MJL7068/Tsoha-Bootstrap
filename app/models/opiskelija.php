@@ -71,11 +71,13 @@ class Opiskelija extends BaseModel{
         $errors = array();
 
         if ($this->nimi == '' || $this->nimi == null) {
-            $errors[] = 'Nimi ei saa olla tyhjä!';
+            //$errors[] = 'Nimi ei saa olla tyhjä!';
+            array_push($errors, 'Nimi ei saa olla tyhjä!');
         }
 
         if (strlen($this->nimi) < 3) {
-            $errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
+            //$errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
+            array_push($errors, 'Nimen pituuden tulee olla vähintään kolme merkkiä!');
         }
 
         return $errors;
@@ -84,8 +86,9 @@ class Opiskelija extends BaseModel{
     public function validate_student_number() {
         $errors = array();
 
-        if (!preg_match("[1-9]{9}", $this->opiskelinumero)) {
-            $errors[] = 'Opiskelinumeron tulee olla yhdeksän numeron mittainen!';
+        if (!preg_match("/^[0-9]{9}$/", $this->opiskelijanumero)) {
+            //$errors[] = 'Opiskelinumeron tulee olla yhdeksän numeron mittainen!';
+            array_push($errors, 'Opiskelijanumeron tulee olla yhdeksän numeron mittainen!');
         }
 
         return $errors;

@@ -1,6 +1,6 @@
 <?php
 
-class KayttajaController {
+class KayttajaController extends BaseController {
     public static function login() {
         View::make('suunnitelmat/login.html');
     }
@@ -16,6 +16,16 @@ class KayttajaController {
             $_SESSION['user'] = $kayttaja->id;
 
             Redirect::to('/', array('message' => 'Tervetuloa takaisin ' . $kayttaja->nimi . '!'));
+        }
+    }
+    
+    public static function handle_logout() {
+        if (self::get_user_logged_in()) {
+            $_SESSTION['user'] = null;
+
+            Redirect::to('/', array('message' => 'Kirjauduttu ulos'));
+        } else {
+            Redirect::to('/');
         }
     }
 }

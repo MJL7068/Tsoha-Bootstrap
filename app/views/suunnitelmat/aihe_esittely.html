@@ -12,10 +12,13 @@
   <p>
     {{aihe.kuvaus}}
       </p>
-    {{forms.destroy_button("#{base_path}/aihe/#{aihe.id}/poista")}}
-    <a href="{{base_path}}/aihe/{{aihe.id}}/edit" class="btn btn-default">Muokkaa aihetta</a>
-    <a href="{{base_path}}/suoritus/uusi" class="btn btn-default">Lisää uusi suoritus</a>
-	<h2>Suoritukset</h2>
+
+    {% if user_logged_in %}
+      {{forms.destroy_button("#{base_path}/aihe/#{aihe.id}/poista")}}
+      <a href="{{base_path}}/aihe/{{aihe.id}}/edit" class="btn btn-default">Muokkaa aihetta</a>
+      <a href="{{base_path}}/suoritus/uusi" class="btn btn-default">Lisää uusi suoritus</a>
+  
+  <h2>Suoritukset</h2>
 	<table class="table">
     <thead>
       <tr>
@@ -30,4 +33,6 @@
       {% endfor %}
     </tbody>
   </table>
+
+    {% endif %}
 {% endblock %}
