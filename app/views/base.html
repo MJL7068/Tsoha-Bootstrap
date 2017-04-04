@@ -40,9 +40,12 @@
           <ul class="nav navbar-nav">
             <!-- Navigaation linkit -->
             <li><a href="{{base_path}}">Etusivu</a></li>
+            <li><a href="{{base_path}}/kurssit">Kurssit</a></li>
             <li><a href="{{base_path}}">Hae</a></li>
             <li><a href="{{base_path}}/login">Login</a></li>
+            {% if user_logged_in %}
             <li><a href="{{base_path}}/logout">Logout</a></li>
+            {% endif %}
           </ul>
         </div>
       </div>

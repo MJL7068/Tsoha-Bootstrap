@@ -1,38 +1,43 @@
 {% extends "base.html" %}
 {% block content %}
 {% import "macros/forms.html" as forms %}
-  <h1>{{aihe.nimi}}</h1>
+<h1>{{aihe.nimi}}</h1>
 
-  <ul>
+<ul>
     <li><strong>Kurssi:</strong> Tietokantasovellus</li>
     <li><strong>Vaikeustaso:</strong> {{aihe.vaikeustaso}}</li>
     <li><strong>Maksimiarvosana:</strong> {{aihe.maksimiarvosana}}</li>
-  </ul>
+</ul>
 
-  <p>
+<p>
     {{aihe.kuvaus}}
-      </p>
+</p>
 
-    {% if user_logged_in %}
-      {{forms.destroy_button("#{base_path}/aihe/#{aihe.id}/poista")}}
-      <a href="{{base_path}}/aihe/{{aihe.id}}/edit" class="btn btn-default">Muokkaa aihetta</a>
-      <a href="{{base_path}}/suoritus/uusi" class="btn btn-default">Lisää uusi suoritus</a>
-  
-  <h2>Suoritukset</h2>
-	<table class="table">
+<span>Aiheen suoritusten lukumäärä: {{data.lukumaara}}</span><br>
+<span>Suoritusten keskiarvo: {{data.keskiarvo}}</span><br>
+<span>Korkein annettu arvosana: {{data.korkein}}</span><br>
+<span>Matalin annettu arvosana: {{data.matalin}}</span><br>
+
+{% if user_logged_in %}
+{{forms.destroy_button("#{base_path}/aihe/#{aihe.id}/poista")}}
+<a href="{{base_path}}/aihe/{{aihe.id}}/edit" class="btn btn-default">Muokkaa aihetta</a>
+<a href="{{base_path}}/suoritus/uusi" class="btn btn-default">Lisää uusi suoritus</a>
+
+<h2>Suoritukset</h2>
+<table class="table">
     <thead>
-      <tr>
-        <th>Suoritus</th>
-      </tr>
+        <tr>
+            <th>Suoritus</th>
+        </tr>
     </thead>
     <tbody>
-      {% for suoritus in suoritukset %}
-      <tr>
-        <td><a href="{{base_path}}/suoritus/{{suoritus.id}}">{{suoritus.nimi}}</td>
-      </tr>
-      {% endfor %}
+        {% for suoritus in suoritukset %}
+        <tr>
+            <td><a href="{{base_path}}/suoritus/{{suoritus.id}}">{{suoritus.nimi}}</td>
+        </tr>
+        {% endfor %}
     </tbody>
-  </table>
+</table>
 
-    {% endif %}
+{% endif %}
 {% endblock %}

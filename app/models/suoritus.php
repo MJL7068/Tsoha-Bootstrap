@@ -129,6 +129,54 @@ class Suoritus extends BaseModel{
 
         return $suoritukset;
     }
+    
+    public static function laskeSuoritustenLukumaaraAiheenMukaan($aihe_id) {
+       $query = DB::connection()->prepare('SELECT COUNT(aihe) AS lukumaara FROM Suoritus WHERE aihe = :id');
+       $query->execute(array('id' => $aihe_id));
+       $row = $query->fetch();
+        
+       if ($row) {
+           $lukumaara = $row['lukumaara'];
+       }
+
+       return $lukumaara;
+    }
+    
+    public static function laskeSuoritustenArvosanojenKeskiarvo($aihe_id) {
+        $query = DB::connection()->prepare('SELECT AVG(arvosana) AS keskiarvo FROM Suoritus WHERE aihe = :id');
+        $query->execute(array('id' => $aihe_id));
+        $row = $query->fetch();
+        
+        if ($row) {
+            $keskiarvo = $row['keskiarvo'];
+        }
+
+        return number_format((float)$keskiarvo, 1, '.', '');
+    }
+    
+    public static function haeKorkeinArvosanaAiheenMukaan($aihe_id) {
+        $query = DB::connection()->prepare('SELECT MAX(arvosana) AS korkein FROM Suoritus WHERE aihe = :id');
+        $query->execute(array('id' => $aihe_id));
+        $row = $query->fetch();
+        
+        if ($row) {
+            $korkein = $row['korkein'];
+        }
+
+        return $korkein;
+    }
+    
+    public static function haeMatalinArvosanaAiheenMukaan($aihe_id) {
+        $query = DB::connection()->prepare('SELECT MIN(arvosana) AS matalin FROM Suoritus WHERE aihe = :id');
+        $query->execute(array('id' => $aihe_id));
+        $row = $query->fetch();
+        
+        if ($row) {
+            $matalin = $row['matalin'];
+        }
+
+        return $matalin;
+    }
 
     public static function poista($id) {
         $query = DB::connection()->prepare('DELETE FROM Suoritus WHERE id = :id');

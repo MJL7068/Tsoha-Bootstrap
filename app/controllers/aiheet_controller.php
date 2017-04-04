@@ -1,19 +1,20 @@
 <?php
 
 class AiheetController extends BaseController {
+
     public static function aihe_lista() {
         $aiheet = Aihe::All();
 
         View::make('suunnitelmat/aihe_lista.html', array('aiheet' => $aiheet));
     }
-	
-	public static function show($id) {
-		$aihe = Aihe::find($id);
 
+    public static function show($id) {
+        $aihe = Aihe::find($id);
+        $data = array('lukumaara' => Suoritus::laskeSuoritustenLukumaaraAiheenMukaan($id), 'keskiarvo' => Suoritus::laskeSuoritustenArvosanojenKeskiarvo($id), 'matalin' => Suoritus::haeMatalinArvosanaAiheenMukaan($id), 'korkein' => Suoritus::haeKorkeinArvosanaAiheenMukaan($id));
         $suoritukset = Suoritus::haeSuorituksetAiheenMukaan($id);
-		
-		View::make('suunnitelmat/aihe_esittely.html', array('aihe' => $aihe, 'suoritukset' => $suoritukset));
-	}
+
+        View::make('suunnitelmat/aihe_esittely.html', array('aihe' => $aihe, 'suoritukset' => $suoritukset, 'data' => $data));
+    }
 
     public static function uusi_kaavio() {
         $kurssit = Kurssi::all();
@@ -66,8 +67,8 @@ class AiheetController extends BaseController {
             'id' => $id,
             'nimi' => $params['nimi'],
             'vaikeustaso' => $params['vaikeustaso'],
-            'maksimiarvosana' => $params['maksimiarvosana'],  
-            'kurssi' => $kurssi->id,  
+            'maksimiarvosana' => $params['maksimiarvosana'],
+            'kurssi' => $kurssi->id,
             'kuvaus' => $params['kuvaus']
         );
 
@@ -82,4 +83,5 @@ class AiheetController extends BaseController {
 
         Redirect::to('/', array('message' => 'Suoritus poistettu onnistunueesti.'));
     }
+
 }

@@ -30,6 +30,9 @@
 	  Kint::dump($kurssit);
 
     Kint::dump(Suoritus::haeSuorituksetOhjaajanMukaan(2));
+    
+    Kint::dump(Suoritus::haeKorkeinArvosanaAiheenMukaan(2));
+    Kint::dump(Suoritus::haeMatalinArvosanaAiheenMukaan(2));
 
     $ville = new Opiskelija(array(
       'nimi' => 'vi',
