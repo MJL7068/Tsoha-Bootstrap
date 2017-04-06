@@ -17,7 +17,7 @@
       <label>Aihe</label>
       <select name="aihe", class="form-control" type="text">
         {% for aihe in aiheet %}
-        <option>{{aihe.nimi}}</option>
+        <option {% if suorituksenAihe.nimi == aihe.nimi %} selected {% endif %}>{{aihe.nimi}}</option>
         {% endfor %}
        </select>
     </div>

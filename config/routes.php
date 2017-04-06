@@ -20,8 +20,8 @@
     SuoritusController::tallenna();
   });
 
-  $routes->get('/suoritus/uusi', function() {
-    SuoritusController::uusi_suoritus();
+  $routes->get('/suoritus/uusi/:aihe_id', function($aihe_id) {
+    SuoritusController::uusi_suoritus($aihe_id);
   });
 
   $routes->post('/opettaja', function() {

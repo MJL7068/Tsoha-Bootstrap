@@ -13,14 +13,15 @@ class SuoritusController extends BaseController {
         View::make('suunnitelmat/suoritus_esittely.html', array('suoritus' => $suoritus, 'aihe' => $aihe, 'tekija' => $tekija, 'ohjaaja' => $ohjaaja));
     }
 
-    public static function uusi_suoritus() {
+    public static function uusi_suoritus($aihe_id) {
         self::check_logged_in();
 
         $aiheet = Aihe::all();
+        $suorituksen_aihe = Aihe::find($aihe_id);
         $opiskelijat = Opiskelija::all();
         $opettajat = Opettaja::all();
 
-        View::make('suunnitelmat/suoritus_uusi.html', array('aiheet' => $aiheet, 'opiskelijat' => $opiskelijat, 'opettajat' => $opettajat));
+        View::make('suunnitelmat/suoritus_uusi.html', array('aiheet' => $aiheet, 'opiskelijat' => $opiskelijat, 'opettajat' => $opettajat, 'suorituksenAihe' => $suorituksen_aihe));
     }
 
     public static function tallenna() {
