@@ -1,40 +1,60 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Muokkaa suoritusta</h1>
+<h1>Muokkaa suoritusta</h1>
 
-  <h2>{{tekija.nimi}}: {{aihe.nimi}}</h2>
-  <form method="post" action="{{base_path}}/suoritus/{{suoritus.id}}/edit">
+<h2>{{tekija.nimi}}: {{aihe.nimi}}</h2>
+<form method="post" action="{{base_path}}/suoritus/{{suoritus.id}}/edit">
     <div class="form-group">
-      <label>Nimi</label>
-      <input name="nimi" class="form-control" value="{{suoritus.nimi}}" type="text">
-    </div>
-    <div class="form-group">
-      <label>Aihe</label>
-      <input name="aihe" class="form-control" value="{{aihe.nimi}}" type="text">
+        <label>Nimi</label>
+        <input name="nimi" class="form-control" value="{{suoritus.nimi}}" type="text">
     </div>
     <div class="form-group">
-      <label>Tekijä</label>
-      <input name="tekija" class="form-control" value="{{tekija.nimi}}" type="text">
+        <label>Aihe</label>
+        <!-- <input name="aihe" class="form-control" value="{{aihe.nimi}}" type="text"> -->
+        <select name="aihe" class="form-control" type=""text>
+            {% for a in aiheet %}
+            <option {% if aihe.nimi == a.nimi %} selected {% endif %}>{{a.nimi}}</option>
+            {% endfor %}
+        </select>
     </div>
     <div class="form-group">
-      <label>Ohjaaja</label>
-      <input name="ohjaaja" class="form-control" value="{{ohjaaja.nimi}}" type="text">
+        <label>Tekijä</label>
+        <!-- <input name="tekija" class="form-control" value="{{tekija.nimi}}" type="text"> -->
+        <select name="tekija" class="form-control" type="text">
+            {% for o in opiskelijat %}
+            <option {% if tekija.nimi == o.nimi %} selected {% endif %}>{{tekija.nimi}}</option>
+            {% endfor %}
+        </select>
     </div>
     <div class="form-group">
-      <label>Työmäärä (tunteina)</label>
-      <input name="tyomaara" class="form-control" value="{{suoritus.tyomaara}}" type="text">
+        <label>Ohjaaja</label>
+        <!-- <input name="ohjaaja" class="form-control" value="{{ohjaaja.nimi}}" type="text"> -->
+        <select name="ohjaaja" class="form-control" type="text"t>
+            {% for o in opettajat %}
+            <option {% if ohjaaja.nimi == o.nimi %} selected {% endif %}>{{ohjaaja.nimi}}</option>
+            {% endfor %}
+        </select>
     </div>
     <div class="form-group">
-      <label>Kuvaus</label>
-      <textarea name="kuvaus" class="form-control">{{suoritus.kuvaus}}
-      </textarea>
-    </div>
-	<div class="form-group">
-      <label>Arvosana</label>
-      <input name="arvosana" class="form-control" value="{{suoritus.arvosana}}" type="text">
+        <label>Työmäärä (tunteina)</label>
+        <input name="tyomaara" class="form-control" value="{{suoritus.tyomaara}}" type="text">
     </div>
     <div class="form-group">
-      <button type="submit" class="btn btn-primary">Tallenna</button>
+        <label>Kuvaus</label>
+        <textarea name="kuvaus" class="form-control">{{suoritus.kuvaus}}
+        </textarea>
     </div>
-  </form>
+    <div class="form-group">
+        <label>Arvosana</label>
+        <select name="arvosana", class="form-control" type="text">
+            {% for i in range(1, aihe.maksimiarvosana) %}
+            <option {% if i == suoritus.arvosana %} selected {% endif %}>{{i}}</option>
+            {% endfor %}
+        </select>
+
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Tallenna</button>
+    </div>
+</form>
 {% endblock %}

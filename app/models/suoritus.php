@@ -208,7 +208,7 @@ class Suoritus extends BaseModel{
     public function validate_description() {
         $errors = array();
 
-        if ($this->nimi == '' || $this->nimi == null) {
+        if ($this->kuvaus == '' || $this->kuvaus == null) {
             //$errors[] = 'Kuvaus ei saa olla tyhjä!';
             array_push($errors, 'Kuvaus ei saa olla tyhjä!');
         }

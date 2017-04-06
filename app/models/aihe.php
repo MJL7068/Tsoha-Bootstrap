@@ -126,8 +126,7 @@ class Aihe extends BaseModel{
     public function validate_description() {
         $errors = array();
 
-        if ($this->nimi == '' || $this->nimi == null) {
-            //$errors[] = 'Kuvaus ei saa olla tyhjä!';
+        if ($this->kuvaus == '' || $this->kuvaus == null) {
             array_push($errors, 'Kuvaus ei saa olla tyhjä!');
         }
 

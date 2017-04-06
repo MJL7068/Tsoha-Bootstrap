@@ -37,8 +37,8 @@ class SuoritusController extends BaseController {
             'tekija' => $opiskelija->id,
             'ohjaaja' => $opettaja->id,                
             'kuvaus' => $params['kuvaus'],
-			'tyomaara' => $params['tyomaara'],
-			'arvosana' => $params['arvosana']
+            'tyomaara' => $params['tyomaara'],
+            'arvosana' => $params['arvosana']
         );
 
         $suoritus = new Suoritus($attributes);
@@ -50,10 +50,11 @@ class SuoritusController extends BaseController {
             Redirect::to('/suoritus/' . $suoritus->id, array('message' => 'Uusi suoritus lisätty tietokantaan.'));
         } else {
             $aiheet = Aihe::all();
+            $suorituksen_aihe = Aihe::find($aihe->id);
             $opiskelijat = Opiskelija::all();
             $opettajat = Opettaja::all();
 
-            View::make('suunnitelmat/suoritus_uusi.html', array('aiheet' => $aiheet, 'opiskelijat' => $opiskelijat, 'opettajat' => $opettajat, 'errors' => $errors, 'attributes' => $attributes));
+            View::make('suunnitelmat/suoritus_uusi.html', array('aiheet' => $aiheet, 'opiskelijat' => $opiskelijat, 'opettajat' => $opettajat, 'errors' => $errors, 'attributes' => $attributes, 'suorituksenAihe' => $suorituksen_aihe));
         }
     }
 
@@ -64,8 +65,12 @@ class SuoritusController extends BaseController {
         $aihe = Aihe::find($suoritus->aihe);
         $tekija = Opiskelija::find($suoritus->tekija);
         $ohjaaja = Opettaja::find($suoritus->ohjaaja);
+        
+        $aiheet = Aihe::all();
+        $opiskelijat = Opiskelija::all();
+        $opettajat = Opettaja::all();
 
-        View::make('suunnitelmat/suoritus_edit.html', array('suoritus' => $suoritus, 'aihe' => $aihe, 'tekija' => $tekija, 'ohjaaja' => $ohjaaja));
+        View::make('suunnitelmat/suoritus_edit.html', array('suoritus' => $suoritus, 'aihe' => $aihe, 'tekija' => $tekija, 'ohjaaja' => $ohjaaja, 'aiheet' => $aiheet, 'opiskelijat' => $opiskelijat, 'opettajat' => $opettajat));
     }
 
     public static function update($id) {
