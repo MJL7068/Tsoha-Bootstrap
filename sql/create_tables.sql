@@ -39,3 +39,8 @@ CREATE TABLE Suoritus(
     tyomaara INTEGER,
     arvosana INTEGER
 );
+
+CREATE TABLE Suorittaja(
+    opiskelija INTEGER REFERENCES Opiskelija(id),
+    suoritus INTEGER REFERENCES Suoritus(id
+);

@@ -75,9 +75,18 @@ class AiheetController extends BaseController {
         );
 
         $aihe = new Aihe($attributes);
-        $aihe->update();
-
-        Redirect::to('/aihe/' . $aihe->id, array('message' => 'Suoritusta muokattu onnistuneesti.'));
+        $errors = $aihe->errors();
+        
+        if (count($errors) == 0) {
+            $aihe->update();
+            Redirect::to('/aihe/' . $aihe->id, array('message' => 'Suoritusta muokattu onnistuneesti.'));
+        } else {
+            $aihe = Aihe::find($id);
+            $kurssi = Kurssi::find($aihe->kurssi);
+            $kurssit = Kurssi::all();
+            
+            View::make('suunnitelmat/aihe_edit.html', array('aihe' => $aihe, 'kurssi' => $kurssi, 'kurssit' => $kurssit, 'errors' => $errors));
+        }
     }
 
     public static function poista($id) {

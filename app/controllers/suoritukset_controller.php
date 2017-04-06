@@ -87,14 +87,28 @@ class SuoritusController extends BaseController {
             'tekija' => $opiskelija->id,
             'ohjaaja' => $opettaja->id,                
             'kuvaus' => $params['kuvaus'],
-			'tyomaara' => $params['tyomaara'],
-			'arvosana' => $params['arvosana']
+            'tyomaara' => $params['tyomaara'],
+            'arvosana' => $params['arvosana']
         );
 
         $suoritus = new Suoritus($attributes);
-        $suoritus->update();
-
-        Redirect::to('/suoritus/' . $suoritus->id, array('message' => 'Suoritusta muokattu onnistuneesti.'));
+        $errors = $suoritus->errors();
+        
+        if (count($errors) == 0) {
+            $suoritus->update();
+            Redirect::to('/suoritus/' . $suoritus->id, array('message' => 'Suoritusta muokattu onnistuneesti.'));
+        } else {
+            $suoritus = Suoritus::find($id);
+            $aihe = Aihe::find($suoritus->aihe);
+            $tekija = Opiskelija::find($suoritus->tekija);
+            $ohjaaja = Opettaja::find($suoritus->ohjaaja);
+        
+            $aiheet = Aihe::all();
+            $opiskelijat = Opiskelija::all();
+            $opettajat = Opettaja::all();
+            
+            View::make('suunnitelmat/suoritus_edit.html', array('suoritus' => $suoritus, 'aihe' => $aihe, 'tekija' => $tekija, 'ohjaaja' => $ohjaaja, 'aiheet' => $aiheet, 'opiskelijat' => $opiskelijat, 'opettajat' => $opettajat, 'errors' => $errors));
+        }
     }
 
     public static function poista($id) {
