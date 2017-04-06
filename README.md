@@ -9,6 +9,10 @@ Työn tarkoituksena on ohjelmoida yksinkertainen tietokantasovellus harjoitusty�
 
 Projekti toteutetaan laitoksen users-palvelimella käyttäen php-ohjelmointikieltä sekä PostgreSQL-tietokantapalvelinta.
 
+Sovellukseen kirjautuminen:
+Käyttäjätunnus: Ylläpitäjä
+Salasana: salasana123
+
 
 ## Linkkejä toteutettuihin sivuihin
 
