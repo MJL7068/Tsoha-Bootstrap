@@ -6,9 +6,17 @@
   <ul>
     <li><strong>Aihe:</strong><a href="{{base_path}}/aihe/{{aihe.id}}"> {{aihe.nimi}}</a></li>
     <li><strong>Tekijä:</strong><a href="{{base_path}}/opiskelija/{{tekija.id}}"> {{tekija.nimi}}</a></li>
+    <li>
+        <ul>
+            {% for t in tekijat %}
+            <li><a href="{{base_path}}/opiskelija/{{t.id}}"></a>{{t.nimi}}</li>
+            {% endfor %}
+        </ul>
+    </li>
     <li><strong>Ohjaaja:</strong><a href="{{base_path}}/opettaja/{{ohjaaja.id}}"> {{ohjaaja.nimi}}</a></li>
     <li><strong>Linkki harjoitustyöhön:</strong> linkki</li>
-	  <li><strong>Arvosana: </strong> {{suoritus.arvosana}}</li>
+    <li><strong>Työmäärä tunteina:</strong> {{suoritus.tyomaara}}</li>
+    <li><strong>Arvosana: </strong> {{suoritus.arvosana}}</li>
   </ul>
 
   <p>
