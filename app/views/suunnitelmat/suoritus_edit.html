@@ -7,12 +7,13 @@
     {% endfor %}
 </ul>
 
-<h2>{{tekija.nimi}}: {{aihe.nimi}}</h2>
+<h2>{% for tekija in tekijat %} {{tekija.nimi}} {% endfor %}: {{aihe.nimi}}</h2>
 <form method="post" action="{{base_path}}/suoritus/{{suoritus.id}}/edit">
     <div class="form-group">
         <label>Nimi</label>
         <input name="nimi" class="form-control" value="{{suoritus.nimi}}" type="text">
     </div>
+    
     <div class="form-group">
         <label>Aihe</label>
         <select name="aihe" class="form-control" type=""text>
@@ -21,14 +22,16 @@
             {% endfor %}
         </select>
     </div>
+    
     <div class="form-group">
-        <label>Tekijä</label>
-        <select name="tekija" class="form-control" type="text">
-            {% for o in opiskelijat %}
-            <option {% if tekija.nimi == o.nimi %} selected {% endif %}>{{tekija.nimi}}</option>
+        <label>Tekijät</label>
+        <select class="form-control" name="tekijat[]" multiple="">
+            {% for opiskelija in opiskelijat %}
+            <option value="{{opiskelija.id}}" selected >{{opiskelija.nimi}}</option>
             {% endfor %}
         </select>
     </div>
+    
     <div class="form-group">
         <label>Ohjaaja</label>
         <select name="ohjaaja" class="form-control" type="text"t>
@@ -37,6 +40,7 @@
             {% endfor %}
         </select>
     </div>
+    
     <div class="form-group">
         <label>Työmäärä (tunteina)</label>
         <input name="tyomaara" class="form-control" value="{{suoritus.tyomaara}}" type="text">
@@ -45,6 +49,7 @@
         <label>Kuvaus</label>
         <textarea name="kuvaus" class="form-control">{{suoritus.kuvaus}}</textarea>
     </div>
+    
     <div class="form-group">
         <label>Arvosana</label>
         <select name="arvosana", class="form-control" type="text">

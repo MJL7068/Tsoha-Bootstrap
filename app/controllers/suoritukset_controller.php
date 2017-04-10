@@ -7,11 +7,15 @@ class SuoritusController extends BaseController {
         $suoritus = Suoritus::find($id);
 
         $aihe = Aihe::find($suoritus->aihe);
-        $tekija = Opiskelija::find($suoritus->tekija);
-        $tekijat = Suoritus::haeSuorituksenTekijat($id);
         $ohjaaja = Opettaja::find($suoritus->ohjaaja);
+        
+        $tekijat_id = Suoritus::haeSuorituksenTekijat($id);
+        $tekijat = array();
+        foreach ($tekijat_id as $tekija_id) {
+            array_push($tekijat, Opiskelija::find($tekija_id));
+        }
 
-        View::make('suunnitelmat/suoritus_esittely.html', array('suoritus' => $suoritus, 'aihe' => $aihe, 'tekija' => $tekija, 'ohjaaja' => $ohjaaja));
+        View::make('suunnitelmat/suoritus_esittely.html', array('suoritus' => $suoritus, 'aihe' => $aihe, 'ohjaaja' => $ohjaaja, 'tekijat' => $tekijat));
     }
 
     public static function uusi_suoritus($aihe_id) {
@@ -29,17 +33,16 @@ class SuoritusController extends BaseController {
         $params = $_POST;
 
         $aihe = Aihe::haeNimenPerusteella($params['aihe']);
-        $opiskelija = Opiskelija::haeNimenPerusteella($params['tekija']);
         $opettaja = Opettaja::haeNimenPerusteella($params['ohjaaja']);
 
         $attributes = array(
             'aihe' => $aihe->id,
             'nimi' => $params['nimi'],
-            'tekija' => $opiskelija->id,
             'ohjaaja' => $opettaja->id,                
             'kuvaus' => $params['kuvaus'],
             'tyomaara' => $params['tyomaara'],
-            'arvosana' => $params['arvosana']
+            'arvosana' => $params['arvosana'],
+            'tekijat' => $params['tekijat']
         );
 
         $suoritus = new Suoritus($attributes);
@@ -64,28 +67,32 @@ class SuoritusController extends BaseController {
 
         $suoritus = Suoritus::find($id);
         $aihe = Aihe::find($suoritus->aihe);
-        $tekija = Opiskelija::find($suoritus->tekija);
         $ohjaaja = Opettaja::find($suoritus->ohjaaja);
+        
+        $tekijat_id = Suoritus::haeSuorituksenTekijat($id);
+        $tekijat = array();
+        foreach ($tekijat_id as $tekija_id) {
+            array_push($tekijat, Opiskelija::find($tekija_id));
+        }
         
         $aiheet = Aihe::all();
         $opiskelijat = Opiskelija::all();
         $opettajat = Opettaja::all();
 
-        View::make('suunnitelmat/suoritus_edit.html', array('suoritus' => $suoritus, 'aihe' => $aihe, 'tekija' => $tekija, 'ohjaaja' => $ohjaaja, 'aiheet' => $aiheet, 'opiskelijat' => $opiskelijat, 'opettajat' => $opettajat));
+        View::make('suunnitelmat/suoritus_edit.html', array('suoritus' => $suoritus, 'aihe' => $aihe, 'tekijat' => $tekijat, 'ohjaaja' => $ohjaaja, 'aiheet' => $aiheet, 'opiskelijat' => $opiskelijat, 'opettajat' => $opettajat));
     }
 
     public static function update($id) {
         $params = $_POST;
 
         $aihe = Aihe::haeNimenPerusteella($params['aihe']);
-        $opiskelija = Opiskelija::haeNimenPerusteella($params['tekija']);
         $opettaja = Opettaja::haeNimenPerusteella($params['ohjaaja']);
 
         $attributes = array(
             'id' => $id,
             'aihe' => $aihe->id,
             'nimi' => $params['nimi'],
-            'tekija' => $opiskelija->id,
+            'tekijat' => $params['tekijat'],
             'ohjaaja' => $opettaja->id,                
             'kuvaus' => $params['kuvaus'],
             'tyomaara' => $params['tyomaara'],
@@ -101,14 +108,19 @@ class SuoritusController extends BaseController {
         } else {
             $suoritus = Suoritus::find($id);
             $aihe = Aihe::find($suoritus->aihe);
-            $tekija = Opiskelija::find($suoritus->tekija);
             $ohjaaja = Opettaja::find($suoritus->ohjaaja);
+            
+            $tekijat_id = Suoritus::haeSuorituksenTekijat($id);
+            $tekijat = array();
+            foreach ($tekijat_id as $tekija_id) {
+                array_push($tekijat, Opiskelija::find($tekija_id));
+            }
         
             $aiheet = Aihe::all();
             $opiskelijat = Opiskelija::all();
             $opettajat = Opettaja::all();
             
-            View::make('suunnitelmat/suoritus_edit.html', array('suoritus' => $suoritus, 'aihe' => $aihe, 'tekija' => $tekija, 'ohjaaja' => $ohjaaja, 'aiheet' => $aiheet, 'opiskelijat' => $opiskelijat, 'opettajat' => $opettajat, 'errors' => $errors));
+            View::make('suunnitelmat/suoritus_edit.html', array('suoritus' => $suoritus, 'aihe' => $aihe, 'tekijat' => $tekijat, 'ohjaaja' => $ohjaaja, 'aiheet' => $aiheet, 'opiskelijat' => $opiskelijat, 'opettajat' => $opettajat, 'errors' => $errors));
         }
     }
 

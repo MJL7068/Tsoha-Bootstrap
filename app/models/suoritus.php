@@ -2,12 +2,12 @@
 
 class Suoritus extends BaseModel {
 
-    public $id, $aihe, $nimi, $tekija, $ohjaaja, $kuvaus, $tyomaara, $arvosana;
+    public $id, $aihe, $nimi, $ohjaaja, $kuvaus, $tyomaara, $arvosana, $tekijat;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
 
-        $this->validators = array('validate_name', 'validate_description', 'validate_effort');
+        $this->validators = array('validate_name', 'validate_description', 'validate_effort', 'validate_tekijat');
     }
 
     public static function all() {
@@ -22,7 +22,6 @@ class Suoritus extends BaseModel {
                 'id' => $row['id'],
                 'aihe' => $row['aihe'],
                 'nimi' => $row['nimi'],
-                'tekija' => $row['tekija'],
                 'ohjaaja' => $row['ohjaaja'],
                 'kuvaus' => $row['kuvaus'],
                 'tyomaara' => $row['tyomaara'],
@@ -43,7 +42,6 @@ class Suoritus extends BaseModel {
                 'id' => $row['id'],
                 'aihe' => $row['aihe'],
                 'nimi' => $row['nimi'],
-                'tekija' => $row['tekija'],
                 'ohjaaja' => $row['ohjaaja'],
                 'kuvaus' => $row['kuvaus'],
                 'tyomaara' => $row['tyomaara'],
@@ -56,33 +54,47 @@ class Suoritus extends BaseModel {
     
 
     public function tallenna() {
-        $query = DB::connection()->prepare('INSERT INTO Suoritus (aihe, nimi, tekija, ohjaaja, kuvaus, tyomaara, arvosana) VALUES (:aihe, :nimi, :tekija, :ohjaaja, :kuvaus, :tyomaara, :arvosana) RETURNING id');
-        $query->execute(array('aihe' => $this->aihe, 'nimi' => $this->nimi, 'tekija' => $this->tekija, 'ohjaaja' => $this->ohjaaja, 'kuvaus' => $this->kuvaus, 'tyomaara' => $this->tyomaara, 'arvosana' => $this->arvosana));
+        $query = DB::connection()->prepare('INSERT INTO Suoritus (aihe, nimi, ohjaaja, kuvaus, tyomaara, arvosana) VALUES (:aihe, :nimi, :ohjaaja, :kuvaus, :tyomaara, :arvosana) RETURNING id');
+        $query->execute(array('aihe' => $this->aihe, 'nimi' => $this->nimi, 'ohjaaja' => $this->ohjaaja, 'kuvaus' => $this->kuvaus, 'tyomaara' => $this->tyomaara, 'arvosana' => $this->arvosana));
         $row = $query->fetch();
 
         $this->id = $row['id'];
+        
+        self::tallennaSuorituksenTekijat($this->tekijat);
+    }
+    
+    public function tallennaSuorituksenTekijat($tekijat) {        
+        foreach($tekijat as $tekija) {
+            $query = DB::connection()->prepare('INSERT INTO Suorittaja (opiskelija, suoritus) VALUES (:opiskelija, :suoritus)');
+            $query->execute(array('opiskelija' => $tekija, 'suoritus' => $this->id));
+        }
+    }
+    
+    public function haeSuorituksenTekijat($id) {
+        $query = DB::connection()->prepare('SELECT * FROM Suorittaja WHERE suoritus = :id');
+        $query->execute(array('id' => $id));
+        
+        $rows = $query->fetchAll();
+        $suoritukset_id = array();
+        
+        foreach ($rows as $row) {
+            $suoritukset_id[] = $row['opiskelija'];
+        }
+        
+        return $suoritukset_id;
     }
 
     public static function haeSuorituksetTekijanMukaan($id) {
-        $query = DB::connection()->prepare('SELECT * FROM Suoritus WHERE tekija = :id');
+        $query = DB::connection()->prepare('SELECT * FROM Suorittaja WHERE opiskelija = :id');
         $query->execute(array('id' => $id));
-
+        
         $rows = $query->fetchAll();
         $suoritukset = array();
-
+        
         foreach ($rows as $row) {
-            $suoritukset[] = new Suoritus(array(
-                'id' => $row['id'],
-                'aihe' => $row['aihe'],
-                'nimi' => $row['nimi'],
-                'tekija' => $row['tekija'],
-                'ohjaaja' => $row['ohjaaja'],
-                'kuvaus' => $row['kuvaus'],
-                'tyomaara' => $row['tyomaara'],
-                'arvosana' => $row['arvosana']
-            ));
+            $suoritukset[] = self::find($row['suoritus']);
         }
-
+        
         return $suoritukset;
     }
 
@@ -98,7 +110,6 @@ class Suoritus extends BaseModel {
                 'id' => $row['id'],
                 'aihe' => $row['aihe'],
                 'nimi' => $row['nimi'],
-                'tekija' => $row['tekija'],
                 'ohjaaja' => $row['ohjaaja'],
                 'kuvaus' => $row['kuvaus'],
                 'tyomaara' => $row['tyomaara'],
@@ -121,7 +132,6 @@ class Suoritus extends BaseModel {
                 'id' => $row['id'],
                 'aihe' => $row['aihe'],
                 'nimi' => $row['nimi'],
-                'tekija' => $row['tekija'],
                 'ohjaaja' => $row['ohjaaja'],
                 'kuvaus' => $row['kuvaus'],
                 'tyomaara' => $row['tyomaara'],
@@ -184,11 +194,26 @@ class Suoritus extends BaseModel {
         $query = DB::connection()->prepare('DELETE FROM Suoritus WHERE id = :id');
         $query->execute(array('id' => $id));
     }
+    
+    public static function poistaSuorituksenTekijat($id) {
+        $query = DB::connection()->prepare('DELETE FROM Suorittaja WHERE suoritus = :id');
+        $query->execute(array('id' => $id));
+    }
 
     public function update() {
-        $query = DB::connection()->prepare('UPDATE Suoritus SET aihe = :aihe, nimi = :nimi, tekija = :tekija, ohjaaja = :ohjaaja, kuvaus = :kuvaus, tyomaara = :tyomaara, arvosana = :arvosana WHERE id = :id');
-        $query->execute(array('aihe' => $this->aihe, 'nimi' => $this->nimi, 'tekija' => $this->tekija, 'ohjaaja' => $this->ohjaaja, 'kuvaus' => $this->kuvaus, 'tyomaara' => $this->tyomaara, 'arvosana' => $this->arvosana, 'id' => $this->id));
+        $query = DB::connection()->prepare('UPDATE Suoritus SET aihe = :aihe, nimi = :nimi, ohjaaja = :ohjaaja, kuvaus = :kuvaus, tyomaara = :tyomaara, arvosana = :arvosana WHERE id = :id');
+        $query->execute(array('aihe' => $this->aihe, 'nimi' => $this->nimi, 'ohjaaja' => $this->ohjaaja, 'kuvaus' => $this->kuvaus, 'tyomaara' => $this->tyomaara, 'arvosana' => $this->arvosana, 'id' => $this->id));
         $query->fetch();
+        
+        self::updateSuorituksenTekijat($this->tekijat);
+    }
+    
+    public function updateSuorituksenTekijat($tekijat) {
+        self::poistaSuorituksenTekijat($this->id);
+        foreach ($tekijat as $tekija) {
+            $query = DB::connection()->prepare('INSERT INTO Suorittaja (opiskelija, suoritus) VALUES (:opiskelija, :suoritus)');
+            $query->execute(array('opiskelija' => $tekija, 'suoritus' => $this->id));
+        }
     }
 
     public function validate_name() {
@@ -230,6 +255,20 @@ class Suoritus extends BaseModel {
             array_push($errors, 'Annettu työmäärä liian suuri!');
         }
 
+        return $errors;
+    }
+    
+    public function validate_tekijat() {
+        $errors = array();
+        
+        if (count($this->tekijat) < 1) {
+            array_push($errors, 'Suorituksella tulee olla ainakin yksi tekijä!');
+        }
+        
+        if (count($this->tekijat) > 4) {
+            array_push($errors, 'Suorituksella saa olla korkeintaan neljä tekijää!');
+        }
+        
         return $errors;
     }
 

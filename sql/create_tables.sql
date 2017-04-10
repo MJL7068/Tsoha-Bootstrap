@@ -33,7 +33,6 @@ CREATE TABLE Suoritus(
     id SERIAL PRIMARY KEY,
     aihe INTEGER REFERENCES Aihe(id),
     nimi varchar(50) NOT NULL,
-    tekija INTEGER REFERENCES Opiskelija(id),
     ohjaaja INTEGER REFERENCES Opettaja(id),
     kuvaus varchar(400),
     tyomaara INTEGER,
@@ -42,5 +41,5 @@ CREATE TABLE Suoritus(
 
 CREATE TABLE Suorittaja(
     opiskelija INTEGER REFERENCES Opiskelija(id),
-    suoritus INTEGER REFERENCES Suoritus(id
+    suoritus INTEGER REFERENCES Suoritus(id)
 );

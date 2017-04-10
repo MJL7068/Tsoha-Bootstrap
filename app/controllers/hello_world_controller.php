@@ -40,6 +40,8 @@ class HelloWorldController extends BaseController {
         ));
         $errors = $ville->errors();
         Kint::dump($errors);
+
+        Kint::dump(Suoritus::haeSuorituksenTekijat(6));
     }
 
     public static function aihe_lista() {

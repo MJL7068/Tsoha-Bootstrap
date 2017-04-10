@@ -5,11 +5,10 @@
 
   <ul>
     <li><strong>Aihe:</strong><a href="{{base_path}}/aihe/{{aihe.id}}"> {{aihe.nimi}}</a></li>
-    <li><strong>Tekijä:</strong><a href="{{base_path}}/opiskelija/{{tekija.id}}"> {{tekija.nimi}}</a></li>
-    <li>
+    <li><strong>Tekijät:</strong>
         <ul>
             {% for t in tekijat %}
-            <li><a href="{{base_path}}/opiskelija/{{t.id}}"></a>{{t.nimi}}</li>
+            <li><a href="{{base_path}}/opiskelija/{{t.id}}"> {{t.nimi}}</a></li>
             {% endfor %}
         </ul>
     </li>
