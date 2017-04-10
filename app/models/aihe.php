@@ -98,6 +98,17 @@ class Aihe extends BaseModel{
     }
 
     public static function poista($id) {
+        $query = DB::connection()->prepare('SELECT id FROM Suoritus WHERE aihe = :id');
+        $query->execute(array('id' => $id));
+        
+        $rows = $query->fetchAll();
+        foreach($rows as $row) {
+            Suoritus::poistaSuorituksenTekijat($row['id']);
+        }
+        
+        $query = DB::connection()->prepare('DELETE FROM Suoritus WHERE aihe = :id');
+        $query->execute(array('id' => $id));
+        
         $query = DB::connection()->prepare('DELETE FROM Aihe WHERE id = :id');
         $query->execute(array('id' => $id));
     }
@@ -111,12 +122,10 @@ class Aihe extends BaseModel{
         $errors = array();
 
         if($this->nimi == '' || $this->nimi == null){
-            //$errors[] = 'Nimi ei saa olla tyhjä!';
             array_push($errors, 'Nimi ei saa olla tyhjä!');
         }
 
         if (strlen($this->nimi) < 3) {
-            //$errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
             array_push($errors, 'Nimen pituuden tulee olla vähintään kolme merkkiä!');
         }
 

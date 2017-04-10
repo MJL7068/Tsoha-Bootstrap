@@ -191,6 +191,8 @@ class Suoritus extends BaseModel {
     }
 
     public static function poista($id) {
+        self::poistaSuorituksenTekijat($id);
+        
         $query = DB::connection()->prepare('DELETE FROM Suoritus WHERE id = :id');
         $query->execute(array('id' => $id));
     }

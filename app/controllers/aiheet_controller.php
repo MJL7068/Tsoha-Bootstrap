@@ -85,7 +85,7 @@ class AiheetController extends BaseController {
             $kurssi = Kurssi::find($aihe->kurssi);
             $kurssit = Kurssi::all();
             
-            View::make('suunnitelmat/aihe_edit.html', array('aihe' => $aihe, 'kurssi' => $kurssi, 'kurssit' => $kurssit, 'errors' => $errors));
+            View::make('suunnitelmat/aihe_edit.html', array(/*'aihe' => $aihe, */'aihe_id' => $aihe->id, 'aihe_nimi' => $aihe->nimi, 'kurssi' => $kurssi, 'kurssit' => $kurssit, 'errors' => $errors, 'attributes' => $attributes));
         }
     }
 

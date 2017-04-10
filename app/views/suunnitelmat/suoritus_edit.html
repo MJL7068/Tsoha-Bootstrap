@@ -8,17 +8,17 @@
 </ul>
 
 <h2>{% for tekija in tekijat %} {{tekija.nimi}} {% endfor %}: {{aihe.nimi}}</h2>
-<form method="post" action="{{base_path}}/suoritus/{{suoritus.id}}/edit">
+<form method="post" action="{{base_path}}/suoritus/{{suoritus.id}}{{suoritus_id}}/edit">
     <div class="form-group">
         <label>Nimi</label>
-        <input name="nimi" class="form-control" value="{{suoritus.nimi}}" type="text">
+        <input name="nimi" class="form-control" value="{{suoritus.nimi}}{{attributes.nimi}}" type="text">
     </div>
     
     <div class="form-group">
         <label>Aihe</label>
         <select name="aihe" class="form-control" type=""text>
             {% for a in aiheet %}
-            <option {% if aihe.nimi == a.nimi %} selected {% endif %}>{{a.nimi}}</option>
+            <option {% if (aihe.nimi == a.nimi or attributes.aihe == a.id) %} selected {% endif %}>{{a.nimi}}</option>
             {% endfor %}
         </select>
     </div>
@@ -36,25 +36,25 @@
         <label>Ohjaaja</label>
         <select name="ohjaaja" class="form-control" type="text"t>
             {% for o in opettajat %}
-            <option {% if ohjaaja.nimi == o.nimi %} selected {% endif %}>{{o.nimi}}</option>
+            <option {% if (ohjaaja.nimi == o.nimi or attributes.ohjaaja == i.id) %} selected {% endif %}>{{o.nimi}}</option>
             {% endfor %}
         </select>
     </div>
     
     <div class="form-group">
         <label>Työmäärä (tunteina)</label>
-        <input name="tyomaara" class="form-control" value="{{suoritus.tyomaara}}" type="text">
+        <input name="tyomaara" class="form-control" value="{{suoritus.tyomaara}}{{attributes.tyomaara}}" type="text">
     </div>
     <div class="form-group">
         <label>Kuvaus</label>
-        <textarea name="kuvaus" class="form-control">{{suoritus.kuvaus}}</textarea>
+        <textarea name="kuvaus" class="form-control">{{suoritus.kuvaus}}{{attributes.kuvaus}}</textarea>
     </div>
     
     <div class="form-group">
         <label>Arvosana</label>
         <select name="arvosana", class="form-control" type="text">
             {% for i in range(1, aihe.maksimiarvosana) %}
-            <option {% if i == suoritus.arvosana %} selected {% endif %}>{{i}}</option>
+            <option {% if (i == suoritus.arvosana or i == attributes.arvosana) %} selected {% endif %}>{{i}}</option>
             {% endfor %}
         </select>
 
