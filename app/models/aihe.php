@@ -48,6 +48,19 @@ class Aihe extends BaseModel{
             return $aihe;
         }
     }
+    
+    public static function count() {
+        $query = DB::connection()->prepare('SELECT COUNT(*) as lukumaara FROM Aihe');
+        $query->execute();
+        
+        $row = $query->fetch();
+
+        if ($row) {
+            $lukumaara = $row['lukumaara'];
+        }
+
+        return $lukumaara;
+    }
 
     public static function aiheetKurssinPerusteella($id) {
         $query = DB::connection()->prepare('SELECT * FROM Aihe WHERE kurssi = :id LIMIT 1');

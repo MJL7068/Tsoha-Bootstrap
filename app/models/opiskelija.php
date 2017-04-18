@@ -42,6 +42,19 @@ class Opiskelija extends BaseModel{
             return $opiskelija;
         }
     }
+    
+    public static function count() {
+        $query = DB::connection()->prepare('SELECT COUNT(*) as lukumaara FROM Opiskelija');
+        $query->execute();
+        
+        $row = $query->fetch();
+
+        if ($row) {
+            $lukumaara = $row['lukumaara'];
+        }
+
+        return $lukumaara;
+    }
 
     public static function haeNimenPerusteella($nimi) {
         $query = DB::connection()->prepare('SELECT * FROM Opiskelija WHERE nimi = :nimi LIMIT 1');

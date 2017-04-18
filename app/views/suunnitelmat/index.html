@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Työaihetietokanta</h1>
+
+{% if not user_logged_in %}
+<p>Tervetuloa harjoitustyöaiheiden tietokantaan.</p>
+
+<p>Mene kaikkien aiheiden listaan <a href="{{base_path}}/aiheet">tästä</a>.</p>
+
+<p>Jos olet ylläpitäjä, kirjaudu sisään <a href="{{base_path}}/login">tästä</a>.</p>
+{% endif %}
+
+{% if user_logged_in %}
+<p>{{message}}</p>
+
+<p>Tietokannassa on {{aiheCount}} eri aihetta ja {{suoritusCount}} suoritusta {{opiskelijaCount}} opiskelijalta.</p>
+{% endif %}
+
+{% endblock %}

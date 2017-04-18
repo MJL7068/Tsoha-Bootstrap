@@ -5,6 +5,10 @@
   });
 
   $routes->get('/', function() {
+    AiheetController::index();
+  });
+
+  $routes->get('/aiheet', function() {
     AiheetController::aihe_lista();
   });
 
@@ -90,6 +94,10 @@
 
   $routes->post('/suoritus/:id/poista', function($id) {
     SuoritusController::poista($id);
+  });
+
+  $routes->get('/opiskelijat', function() {
+    OpiskelijaController::opiskelijat_lista();
   });
 
   $routes->get('/opiskelija/:id', function($id) {

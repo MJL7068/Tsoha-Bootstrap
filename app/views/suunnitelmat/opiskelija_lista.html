@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+ <div class="container">
+  <h2>Opiskelijat</h2>            
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nimi</th>
+        <th>Opiskelijanumero</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for opiskelija in opiskelijat %}
+      <tr>
+        <td><a href="{{base_path}}/opiskelija/{{opiskelija.id}}">{{opiskelija.nimi}}</a></td>
+        <td>{{opiskelija.opiskelijanumero}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -16,6 +16,12 @@ class OpiskelijaController extends BaseController {
 
         View::make('suunnitelmat/opiskelija_uusi.html');
     }
+    
+    public static function opiskelijat_lista() {
+        $opiskelijat = Opiskelija::all();
+        
+        View::make('suunnitelmat/opiskelija_lista.html', array('opiskelijat' => $opiskelijat));
+    }
 
     public static function tallenna() {
         $params = $_POST;

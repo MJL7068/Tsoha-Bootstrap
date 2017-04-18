@@ -52,6 +52,19 @@ class Suoritus extends BaseModel {
         }
     }
     
+    public static function count() {
+        $query = DB::connection()->prepare('SELECT COUNT(*) as lukumaara FROM Suoritus');
+        $query->execute();
+        
+        $row = $query->fetch();
+
+        if ($row) {
+            $lukumaara = $row['lukumaara'];
+        }
+
+        return $lukumaara;
+    }
+    
 
     public function tallenna() {
         $query = DB::connection()->prepare('INSERT INTO Suoritus (aihe, nimi, ohjaaja, kuvaus, tyomaara, arvosana) VALUES (:aihe, :nimi, :ohjaaja, :kuvaus, :tyomaara, :arvosana) RETURNING id');
