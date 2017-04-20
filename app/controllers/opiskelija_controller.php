@@ -10,19 +10,19 @@ class OpiskelijaController extends BaseController {
 
         View::make('kayttajat/opiskelija.html', array('opiskelija' => $opiskelija, 'harjoitustyot' => $suoritukset));
     }
-
+/*
     public static function uusi_opiskelija() {
         self::check_logged_in();
 
         View::make('kayttajat/opiskelija_uusi.html');
     }
-    
+*/    
     public static function opiskelijat_lista() {
         $opiskelijat = Opiskelija::all();
         
         View::make('kayttajat/opiskelija_lista.html', array('opiskelijat' => $opiskelijat));
     }
-
+/*
     public static function tallenna() {
         $params = $_POST;
 
@@ -42,4 +42,5 @@ class OpiskelijaController extends BaseController {
             View::make('kayttajat/opiskelija_uusi.html', array('errors' => $errors, 'attributes' => $attributes));
         }
     }
+ */
 }

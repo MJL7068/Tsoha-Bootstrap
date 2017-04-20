@@ -16,7 +16,7 @@ class OpettajaController extends BaseController {
 
         View::make('kayttajat/opettaja_uusi.html');
     }
-
+/*
     public static function tallenna() {
         $params = $_POST;
 
@@ -28,4 +28,5 @@ class OpettajaController extends BaseController {
 
         Redirect::to('/opettaja/' . $opettaja->id, array('message' => 'Opettajan tiedot lisätty tietokantaan.'));
     }
+ */
 }

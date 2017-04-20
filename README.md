@@ -34,8 +34,4 @@ Salasana: salasana123
 
 [Suorituksen lisäyssivu](http://matleino.users.cs.helsinki.fi/projekti/suoritus/uusi)
 
-[Opettajan lisäyssivu](http://matleino.users.cs.helsinki.fi/projekti/opettaja/uusi)
-
-[Opiskelijan lisäyssivu](http://matleino.users.cs.helsinki.fi/projekti/opiskelija/uusi)
-
 [Kirjautumissivu](http://matleino.users.cs.helsinki.fi/projekti/login)

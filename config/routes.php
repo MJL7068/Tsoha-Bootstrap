@@ -27,7 +27,7 @@
   $routes->get('/suoritus/uusi/:aihe_id', function($aihe_id) {
     SuoritusController::uusi_suoritus($aihe_id);
   });
-
+/*
   $routes->post('/opettaja', function() {
     OpettajaController::tallenna();
   });
@@ -43,7 +43,7 @@
   $routes->get('/opiskelija/uusi', function() {
     OpiskelijaController::uusi_opiskelija();
   });
-
+*/
   $routes->post('/kurssi', function() {
     KurssitController::tallenna();
   });
