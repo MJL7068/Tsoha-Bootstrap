@@ -71,7 +71,7 @@ class Opiskelija extends BaseModel{
             return $opiskelija;
         }
     }
-/*
+
     public function tallenna() {
         $query = DB::connection()->prepare('INSERT INTO Opiskelija (nimi, opiskelijanumero) VALUES (:nimi, :opiskelijanumero) RETURNING ID');
         $query->execute(array('nimi' => $this->nimi, 'opiskelijanumero' => $this->opiskelijanumero));
@@ -79,32 +79,29 @@ class Opiskelija extends BaseModel{
         $row = $query->fetch();
         $this->id = $row['id'];
     }
-
+/*
     public function validate_name() {
         $errors = array();
 
         if ($this->nimi == '' || $this->nimi == null) {
-            //$errors[] = 'Nimi ei saa olla tyhjä!';
             array_push($errors, 'Nimi ei saa olla tyhjä!');
         }
 
         if (strlen($this->nimi) < 3) {
-            //$errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
             array_push($errors, 'Nimen pituuden tulee olla vähintään kolme merkkiä!');
         }
 
         return $errors;
     }
-
+*/
     public function validate_student_number() {
         $errors = array();
 
         if (!preg_match("/^[0-9]{9}$/", $this->opiskelijanumero)) {
-            //$errors[] = 'Opiskelinumeron tulee olla yhdeksän numeron mittainen!';
             array_push($errors, 'Opiskelijanumeron tulee olla yhdeksän numeron mittainen!');
         }
 
         return $errors;
     }
-*/
+
 }

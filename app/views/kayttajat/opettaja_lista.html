@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+ <div class="container">
+  <h2>Opettajat</h2>            
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nimi</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for opettaja in opettajat %}
+      <tr>
+        <td><a href="{{base_path}}/opettaja/{{opettaja.id}}">{{opettaja.nimi}}</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+    <a href="{{base_path}}/opettaja/uusi" class="btn btn-default">Lisää uusi opettaja</a>
+</div>
+{% endblock %}
+

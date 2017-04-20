@@ -10,23 +10,38 @@ class OpettajaController extends BaseController {
 
         View::make('kayttajat/opettaja.html', array('opettaja' => $opettaja, 'suoritukset' => $opettajanOhjaamatSuoritukset));
     }
+    
+    public static function opettajat_lista() {
+        self::check_logged_in();
+        
+        $opettajat = Opettaja::all();
+        
+        View::make('kayttajat/opettaja_lista.html', array('opettajat' => $opettajat));
+    }
 
     public static function uusi_opettaja() {
         self::check_logged_in();
 
         View::make('kayttajat/opettaja_uusi.html');
     }
-/*
+
     public static function tallenna() {
         $params = $_POST;
 
-        $opettaja = new Opettaja(array(
+        $attributes = array(
             'nimi' => $params['nimi']
-        ));
+        );
 
-        $opettaja->tallenna();
+        $opettaja = new Opettaja($attributes);
+        $errors = $opettaja->errors();
 
-        Redirect::to('/opettaja/' . $opettaja->id, array('message' => 'Opettajan tiedot lisätty tietokantaan.'));
+        if (count($errors) == 0) {
+            $opettaja->tallenna();
+
+            Redirect::to('/opettaja/' . $opettaja->id, array('message' => 'Opettajan tiedot lisätty tietokantaan.'));
+        } else {
+            View::make('kayttajat/opettaja_uusi.html', array('errors' => $errors, 'attributes' => $attributes));
+        }
     }
- */
+ 
 }
