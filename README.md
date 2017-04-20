@@ -11,14 +11,16 @@ Projekti toteutetaan laitoksen users-palvelimella käyttäen php-ohjelmointikiel
 
 Sovellukseen kirjautuminen:
 
-Käyttäjätunnus: Ylläpitäjä
+Käyttäjätunnus: Yllapitaja
 
 Salasana: salasana123
 
 
 ## Linkkejä toteutettuihin sivuihin
 
-[Aiheiden listaussivu](http://matleino.users.cs.helsinki.fi/projekti/aiheet). Tällä sivulla listataan kaikki eri harjoitustyöaiheet. Toimii tällä hetkellä myös etusivuna. Ideana on että käyttäjä näkee heti järjestelmän avattuaan kaikki aiheet.
+[Etusivu](http://matleino.users.cs.helsinki.fi/projekti/). Jos käyttäjä on kirjautunut sisään, tällä sivulla näkyy myös yhteenveto tietokannassa olevista harjoitustöistä.
+
+[Aiheiden listaussivu](http://matleino.users.cs.helsinki.fi/projekti/aiheet). Tällä sivulla listataan kaikki eri harjoitustyöaiheet.
 
 [Aiheen esittelysivu](http://matleino.users.cs.helsinki.fi/projekti/aihe/1). Sivulla näkyy aiheeseen liittyvät yksityiskohdat ja lisäksi lista niistä opiskelijoista, jotka ovat tehneet aiheesta harjoitustyön.
 
