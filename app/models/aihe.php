@@ -111,6 +111,7 @@ class Aihe extends BaseModel{
     }
 
     public static function poista($id) {
+        // Poistetaan ensin aiheeseen liittyvät suoritukset tietokannasta.
         $query = DB::connection()->prepare('SELECT id FROM Suoritus WHERE aihe = :id');
         $query->execute(array('id' => $id));
         
@@ -122,6 +123,7 @@ class Aihe extends BaseModel{
         $query = DB::connection()->prepare('DELETE FROM Suoritus WHERE aihe = :id');
         $query->execute(array('id' => $id));
         
+        // Poistetaan itse aihe.
         $query = DB::connection()->prepare('DELETE FROM Aihe WHERE id = :id');
         $query->execute(array('id' => $id));
     }

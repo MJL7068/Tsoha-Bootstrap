@@ -25,20 +25,4 @@
       return $errors;
     }
 
-    public function validate_name() {
-        $errors = array();
-
-        if ($this->nimi == '' || $this->nimi == null) {
-            //$errors[] = 'Nimi ei saa olla tyhjä!';
-            array_push($errors, 'Nimi ei saa olla tyhjä!');
-        }
-
-        if (strlen($this->nimi) < 3) {
-            //$errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
-            array_push($errors, 'Nimen pituuden tulee olla vähintään kolme merkkiä!');
-        }
-
-        return $errors;
-    }
-
   }

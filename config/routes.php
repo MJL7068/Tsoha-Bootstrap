@@ -107,11 +107,11 @@
   $routes->get('/opettaja/:id', function($id) {
     OpettajaController::show($id);
   });
-
+/*
   $routes->get('/haku', function() {
     HelloWorldController::haku();
   });
-
+*/
   $routes->get('/login', function(){
     KayttajaController::login();
   });
