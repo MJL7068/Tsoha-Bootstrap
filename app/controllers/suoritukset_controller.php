@@ -15,7 +15,7 @@ class SuoritusController extends BaseController {
             array_push($tekijat, Opiskelija::find($tekija_id));
         }
 
-        View::make('suunnitelmat/suoritus_esittely.html', array('suoritus' => $suoritus, 'aihe' => $aihe, 'ohjaaja' => $ohjaaja, 'tekijat' => $tekijat));
+        View::make('suoritus/suoritus_esittely.html', array('suoritus' => $suoritus, 'aihe' => $aihe, 'ohjaaja' => $ohjaaja, 'tekijat' => $tekijat));
     }
 
     public static function uusi_suoritus($aihe_id) {
@@ -26,7 +26,7 @@ class SuoritusController extends BaseController {
         $opiskelijat = Opiskelija::all();
         $opettajat = Opettaja::all();
 
-        View::make('suunnitelmat/suoritus_uusi.html', array('aiheet' => $aiheet, 'opiskelijat' => $opiskelijat, 'opettajat' => $opettajat, 'suorituksenAihe' => $suorituksen_aihe));
+        View::make('suoritus/suoritus_uusi.html', array('aiheet' => $aiheet, 'opiskelijat' => $opiskelijat, 'opettajat' => $opettajat, 'suorituksenAihe' => $suorituksen_aihe));
     }
 
     public static function tallenna() {
@@ -58,7 +58,7 @@ class SuoritusController extends BaseController {
             $opiskelijat = Opiskelija::all();
             $opettajat = Opettaja::all();
 
-            View::make('suunnitelmat/suoritus_uusi.html', array('aiheet' => $aiheet, 'opiskelijat' => $opiskelijat, 'opettajat' => $opettajat, 'errors' => $errors, 'attributes' => $attributes, 'suorituksenAihe' => $suorituksen_aihe));
+            View::make('suoritus/suoritus_uusi.html', array('aiheet' => $aiheet, 'opiskelijat' => $opiskelijat, 'opettajat' => $opettajat, 'errors' => $errors, 'attributes' => $attributes, 'suorituksenAihe' => $suorituksen_aihe));
         }
     }
 
@@ -79,7 +79,7 @@ class SuoritusController extends BaseController {
         $opiskelijat = Opiskelija::all();
         $opettajat = Opettaja::all();
 
-        View::make('suunnitelmat/suoritus_edit.html', array('suoritus' => $suoritus, 'aihe' => $aihe, 'tekijat' => $tekijat, 'ohjaaja' => $ohjaaja, 'aiheet' => $aiheet, 'opiskelijat' => $opiskelijat, 'opettajat' => $opettajat));
+        View::make('suoritus/suoritus_edit.html', array('suoritus' => $suoritus, 'aihe' => $aihe, 'tekijat' => $tekijat, 'ohjaaja' => $ohjaaja, 'aiheet' => $aiheet, 'opiskelijat' => $opiskelijat, 'opettajat' => $opettajat));
     }
 
     public static function update($id) {
@@ -120,7 +120,7 @@ class SuoritusController extends BaseController {
             $opiskelijat = Opiskelija::all();
             $opettajat = Opettaja::all();
             
-            View::make('suunnitelmat/suoritus_edit.html', array(/*'suoritus' => $suoritus,*/'suoritus_id' => $suoritus->id, 'aihe' => $aihe, 'tekijat' => $tekijat, 'ohjaaja' => $ohjaaja, 'aiheet' => $aiheet, 'opiskelijat' => $opiskelijat, 'opettajat' => $opettajat, 'attributes' => $attributes, 'errors' => $errors));
+            View::make('suoritus/suoritus_edit.html', array(/*'suoritus' => $suoritus,*/'suoritus_id' => $suoritus->id, 'aihe' => $aihe, 'tekijat' => $tekijat, 'ohjaaja' => $ohjaaja, 'aiheet' => $aiheet, 'opiskelijat' => $opiskelijat, 'opettajat' => $opettajat, 'attributes' => $attributes, 'errors' => $errors));
         }
     }
 

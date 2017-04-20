@@ -8,13 +8,13 @@ class OpettajaController extends BaseController {
 
         $opettajanOhjaamatSuoritukset = Suoritus::haeSuorituksetOhjaajanMukaan($id);
 
-        View::make('suunnitelmat/opettaja.html', array('opettaja' => $opettaja, 'suoritukset' => $opettajanOhjaamatSuoritukset));
+        View::make('kayttajat/opettaja.html', array('opettaja' => $opettaja, 'suoritukset' => $opettajanOhjaamatSuoritukset));
     }
 
     public static function uusi_opettaja() {
         self::check_logged_in();
 
-        View::make('suunnitelmat/opettaja_uusi.html');
+        View::make('kayttajat/opettaja_uusi.html');
     }
 
     public static function tallenna() {

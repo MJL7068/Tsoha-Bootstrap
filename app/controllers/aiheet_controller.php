@@ -7,13 +7,13 @@ class AiheetController extends BaseController {
         $aiheCount = Aihe::count();
         $opiskelijaCount = Opiskelija::count();
         
-        View::make('suunnitelmat/index.html', array('suoritusCount' => $suoritusCount, 'aiheCount' => $aiheCount, 'opiskelijaCount' => $opiskelijaCount));
+        View::make('/index.html', array('suoritusCount' => $suoritusCount, 'aiheCount' => $aiheCount, 'opiskelijaCount' => $opiskelijaCount));
     }
 
     public static function aihe_lista() {
         $aiheet = Aihe::All();
 
-        View::make('suunnitelmat/aihe_lista.html', array('aiheet' => $aiheet));
+        View::make('aihe/aihe_lista.html', array('aiheet' => $aiheet));
     }
 
     public static function show($id) {
@@ -22,14 +22,14 @@ class AiheetController extends BaseController {
         $data = array('lukumaara' => Suoritus::laskeSuoritustenLukumaaraAiheenMukaan($id), 'keskiarvo' => Suoritus::laskeSuoritustenArvosanojenKeskiarvo($id), 'matalin' => Suoritus::haeMatalinArvosanaAiheenMukaan($id), 'korkein' => Suoritus::haeKorkeinArvosanaAiheenMukaan($id));
         $suoritukset = Suoritus::haeSuorituksetAiheenMukaan($id);
 
-        View::make('suunnitelmat/aihe_esittely.html', array('aihe' => $aihe, 'suoritukset' => $suoritukset, 'kurssi' => $kurssi, 'data' => $data));
+        View::make('aihe/aihe_esittely.html', array('aihe' => $aihe, 'suoritukset' => $suoritukset, 'kurssi' => $kurssi, 'data' => $data));
     }
 
     public static function uusi_kaavio() {
         $kurssit = Kurssi::all();
 
         self::check_logged_in();
-        View::make('suunnitelmat/aihe_uusi.html', array('kurssit' => $kurssit));
+        View::make('aihe/aihe_uusi.html', array('kurssit' => $kurssit));
     }
 
     public static function tallenna() {
@@ -54,7 +54,7 @@ class AiheetController extends BaseController {
             Redirect::to('/aihe/' . $aihe->id, array('message' => 'Aihe lisätty tietokantaan.'));
         } else {
             $kurssit = Kurssi::all();
-            View::make('suunnitelmat/aihe_uusi.html', array('kurssit' => $kurssit, 'errors' => $errors, 'attributes' => $attributes));
+            View::make('aihe/aihe_uusi.html', array('kurssit' => $kurssit, 'errors' => $errors, 'attributes' => $attributes));
         }
     }
 
@@ -65,7 +65,7 @@ class AiheetController extends BaseController {
         $kurssi = Kurssi::find($aihe->kurssi);
         $kurssit = Kurssi::all();
 
-        View::make('suunnitelmat/aihe_edit.html', array('aihe' => $aihe, 'kurssi' => $kurssi, 'kurssit' => $kurssit));
+        View::make('aihe/aihe_edit.html', array('aihe' => $aihe, 'kurssi' => $kurssi, 'kurssit' => $kurssit));
     }
 
     public static function update($id) {
@@ -93,7 +93,7 @@ class AiheetController extends BaseController {
             $kurssi = Kurssi::find($aihe->kurssi);
             $kurssit = Kurssi::all();
             
-            View::make('suunnitelmat/aihe_edit.html', array(/*'aihe' => $aihe, */'aihe_id' => $aihe->id, 'aihe_nimi' => $aihe->nimi, 'kurssi' => $kurssi, 'kurssit' => $kurssit, 'errors' => $errors, 'attributes' => $attributes));
+            View::make('aihe/aihe_edit.html', array(/*'aihe' => $aihe, */'aihe_id' => $aihe->id, 'aihe_nimi' => $aihe->nimi, 'kurssi' => $kurssi, 'kurssit' => $kurssit, 'errors' => $errors, 'attributes' => $attributes));
         }
     }
 
