@@ -2,8 +2,7 @@
 {% block content %}
 
  <div class="container">
-   <!--<h3>{{message}}</h3>-->
-  <h2>Aiheet</h2>            
+  <h2>Aiheet</h2>   
   <table class="table">
     <thead>
       <tr>
@@ -22,6 +21,14 @@
       {% endfor %}
     </tbody>
   </table>
+  
+  <form method="get" action="" class="form-inline">
+    <div class="form group">
+      <input name="search" class="form-control" placeholder="Hakusana" type="text">
+    </div>
+    <button type="submit" class="btn btn-default">Hae</button>
+  </form>
+  
   {% if user_logged_in %}
     <a href="{{base_path}}/aihe/uusi" class="btn btn-default">Lisää uusi aihe</a>
   {% endif %}

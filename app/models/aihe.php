@@ -9,9 +9,16 @@ class Aihe extends BaseModel{
         $this->validators = array('validate_name', 'validate_description');
     }
 
-    public static function all() {
-        $query = DB::connection()->prepare('SELECT * FROM Aihe');
-        $query->execute();
+    public static function all($options) {
+        $query_string = 'SELECT * FROM Aihe';
+        $arr = array();
+        if (isset($options['search'])) {
+            $query_string .= ' WHERE nimi LIKE :like';
+            $arr['like'] = '%' . $options['search'] . '%';
+        }
+        
+        $query = DB::connection()->prepare($query_string/*'SELECT * FROM Aihe'*/);
+        $query->execute($arr);
 
         $rows = $query->fetchAll();
         $aiheet = array();
@@ -146,7 +153,7 @@ class Aihe extends BaseModel{
 
         return $errors;
     }
-
+/*
     public function validate_description() {
         $errors = array();
 
@@ -156,4 +163,5 @@ class Aihe extends BaseModel{
 
         return $errors;
     }
+ */
 }

@@ -16,7 +16,7 @@
       <label>Kurssi</label>
       <select name="kurssi", class="form-control" type="text">
         {% for kurssi in kurssit %}
-        <option>{{kurssi.nimi}}</option>
+        <option {% if attributes.kurssi == kurssi.id %} selected {% endif %}>{{kurssi.nimi}}</option>
         {% endfor %}
        </select>
     </div>
@@ -24,20 +24,18 @@
     <div class="form-group">
       <label>Vaikeustaso</label>
       <select name="vaikeustaso", class="form-control" type="text">
-        <option>Helppo</option>
-        <option selected>Keskitasoa</option>
-        <option>Vaikea</option>
+          {% for vaikeustaso in ["Vaikea", "Keskitasoa", "Helppo"] %}
+          <option {% if attributes.vaikeustaso == vaikeustaso %} selected {% endif %}>{{vaikeustaso}}</option>
+          {% endfor %}
        </select>
     </div>
 
     <div class="form-group">
        <label>Maksimiarvosana</label>
        <select name="maksimiarvosana", class="form-control" type="text">
-        <option selected>5</option>
-        <option>4</option>
-        <option>3</option>
-        <option>2</option>
-        <option>1</option>
+           {% for maksimiarvosana in 5..1 %}
+           <option {% if attributes.maksimiarvosana == maksimiarvosana %} selected {% endif %}>{{maksimiarvosana}}</option>
+           {% endfor %}
        </select>
     </div>
 

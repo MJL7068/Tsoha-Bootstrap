@@ -6,7 +6,7 @@ class HelloWorldController extends BaseController {
 
     public static function sandbox() {
         $drinkit = Aihe::find(1);
-        $aiheet = Aihe::all();
+        $aiheet = Aihe::all(array());
 
         $opiskelija = Opiskelija::find(1);
         $opiskelijat = Opiskelija::all();

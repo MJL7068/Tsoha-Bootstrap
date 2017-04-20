@@ -39,4 +39,18 @@
         return $errors;
     }
 
+    public function validate_description() {
+        $errors = array();
+
+        if ($this->kuvaus == '' || $this->kuvaus == null) {
+            array_push($errors, 'Kuvaus ei saa olla tyhjä!');
+        }
+        
+        if (strlen($this->kuvaus) > 400) {
+            array_push($errors, 'Kuvaus saa olla korkeintaan 400 merkkiä pitkä!');
+        }
+
+        return $errors;
+    }
+
   }

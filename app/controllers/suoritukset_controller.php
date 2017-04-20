@@ -21,7 +21,7 @@ class SuoritusController extends BaseController {
     public static function uusi_suoritus($aihe_id) {
         self::check_logged_in();
 
-        $aiheet = Aihe::all();
+        $aiheet = Aihe::all(array());
         $suorituksen_aihe = Aihe::find($aihe_id);
         $opiskelijat = Opiskelija::all();
         $opettajat = Opettaja::all();
@@ -53,7 +53,7 @@ class SuoritusController extends BaseController {
 
             Redirect::to('/suoritus/' . $suoritus->id, array('message' => 'Uusi suoritus lisätty tietokantaan.'));
         } else {
-            $aiheet = Aihe::all();
+            $aiheet = Aihe::all(array());
             $suorituksen_aihe = Aihe::find($aihe->id);
             $opiskelijat = Opiskelija::all();
             $opettajat = Opettaja::all();
@@ -75,7 +75,7 @@ class SuoritusController extends BaseController {
             array_push($tekijat, Opiskelija::find($tekija_id));
         }
         
-        $aiheet = Aihe::all();
+        $aiheet = Aihe::all(array());
         $opiskelijat = Opiskelija::all();
         $opettajat = Opettaja::all();
 
@@ -116,7 +116,7 @@ class SuoritusController extends BaseController {
                 array_push($tekijat, Opiskelija::find($tekija_id));
             }
         
-            $aiheet = Aihe::all();
+            $aiheet = Aihe::all(array());
             $opiskelijat = Opiskelija::all();
             $opettajat = Opettaja::all();
             

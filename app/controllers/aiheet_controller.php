@@ -11,7 +11,14 @@ class AiheetController extends BaseController {
     }
 
     public static function aihe_lista() {
-        $aiheet = Aihe::All();
+        $params = $_GET; 
+        $options = array();
+        
+        if (isset($params['search'])) {
+            $options['search'] = $params['search'];
+        }
+        
+        $aiheet = Aihe::All($options);
 
         View::make('aihe/aihe_lista.html', array('aiheet' => $aiheet));
     }
@@ -93,7 +100,7 @@ class AiheetController extends BaseController {
             $kurssi = Kurssi::find($aihe->kurssi);
             $kurssit = Kurssi::all();
             
-            View::make('aihe/aihe_edit.html', array(/*'aihe' => $aihe, */'aihe_id' => $aihe->id, 'aihe_nimi' => $aihe->nimi, 'kurssi' => $kurssi, 'kurssit' => $kurssit, 'errors' => $errors, 'attributes' => $attributes));
+            View::make('aihe/aihe_edit.html', array('aihe' => $aihe, 'aihe_id' => $aihe->id, 'aihe_nimi' => $aihe->nimi, 'kurssi' => $kurssi, 'kurssit' => $kurssit, 'errors' => $errors, 'attributes' => $attributes));
         }
     }
 
