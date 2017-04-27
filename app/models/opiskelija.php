@@ -79,26 +79,21 @@ class Opiskelija extends BaseModel{
         $row = $query->fetch();
         $this->id = $row['id'];
     }
-/*
-    public function validate_name() {
-        $errors = array();
 
-        if ($this->nimi == '' || $this->nimi == null) {
-            array_push($errors, 'Nimi ei saa olla tyhjä!');
-        }
-
-        if (strlen($this->nimi) < 3) {
-            array_push($errors, 'Nimen pituuden tulee olla vähintään kolme merkkiä!');
-        }
-
-        return $errors;
-    }
-*/
     public function validate_student_number() {
         $errors = array();
 
         if (!preg_match("/^[0-9]{9}$/", $this->opiskelijanumero)) {
             array_push($errors, 'Opiskelijanumeron tulee olla yhdeksän numeron mittainen!');
+        }
+        
+        // Tulee tarkistaa että annettua opiskelijanumeroa ei ole vielä käytetty
+        $query = DB::connection()->prepare('SELECT * FROM Opiskelija WHERE opiskelijanumero = :opiskelijanumero');
+        $query->execute(array('opiskelijanumero' => $this->opiskelijanumero));
+        
+        $row = $query->fetch();
+        if ($row) {
+            array_push($errors, 'Opiskelijanumeron tulee olla uniikki!');
         }
 
         return $errors;

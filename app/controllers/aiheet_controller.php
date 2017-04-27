@@ -25,6 +25,10 @@ class AiheetController extends BaseController {
 
     public static function show($id) {
         $aihe = Aihe::find($id);
+        if (!$aihe) {
+            View::make('/index.html', array('message' => 'Aihetta ei ole olemassa!'));
+        }
+        
         $kurssi = Kurssi::find($aihe->kurssi);
         $data = array('lukumaara' => Suoritus::laskeSuoritustenLukumaaraAiheenMukaan($id), 'keskiarvo' => Suoritus::laskeSuoritustenArvosanojenKeskiarvo($id), 'matalin' => Suoritus::haeMatalinArvosanaAiheenMukaan($id), 'korkein' => Suoritus::haeKorkeinArvosanaAiheenMukaan($id));
         $suoritukset = Suoritus::haeSuorituksetAiheenMukaan($id);

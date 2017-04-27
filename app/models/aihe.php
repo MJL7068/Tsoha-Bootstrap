@@ -1,6 +1,7 @@
 <?php
 
-class Aihe extends BaseModel{
+class Aihe extends BaseModel {
+
     public $id, $nimi, $vaikeustaso, $maksimiarvosana, $kurssi, $kuvaus;
 
     public function __construct($attributes) {
@@ -16,14 +17,14 @@ class Aihe extends BaseModel{
             $query_string .= ' WHERE nimi LIKE :like';
             $arr['like'] = '%' . $options['search'] . '%';
         }
-        
-        $query = DB::connection()->prepare($query_string/*'SELECT * FROM Aihe'*/);
+
+        $query = DB::connection()->prepare($query_string/* 'SELECT * FROM Aihe' */);
         $query->execute($arr);
 
         $rows = $query->fetchAll();
         $aiheet = array();
 
-        foreach($rows as $row) {
+        foreach ($rows as $row) {
             $aiheet[] = new Aihe(array(
                 'id' => $row['id'],
                 'nimi' => $row['nimi'],
@@ -38,6 +39,10 @@ class Aihe extends BaseModel{
     }
 
     public static function find($id) {
+        if (!is_numeric($id)) {
+            return null;
+        }
+
         $query = DB::connection()->prepare('SELECT * FROM Aihe WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
         $row = $query->fetch();
@@ -55,11 +60,11 @@ class Aihe extends BaseModel{
             return $aihe;
         }
     }
-    
+
     public static function count() {
         $query = DB::connection()->prepare('SELECT COUNT(*) as lukumaara FROM Aihe');
         $query->execute();
-        
+
         $row = $query->fetch();
 
         if ($row) {
@@ -70,13 +75,13 @@ class Aihe extends BaseModel{
     }
 
     public static function aiheetKurssinPerusteella($id) {
-        $query = DB::connection()->prepare('SELECT * FROM Aihe WHERE kurssi = :id LIMIT 1');
+        $query = DB::connection()->prepare('SELECT * FROM Aihe WHERE kurssi = :id');
         $query->execute(array('id' => $id));
-        
+
         $rows = $query->fetchAll();
         $aiheet = array();
 
-        foreach($rows as $row) {
+        foreach ($rows as $row) {
             $aiheet[] = new Aihe(array(
                 'id' => $row['id'],
                 'nimi' => $row['nimi'],
@@ -121,15 +126,15 @@ class Aihe extends BaseModel{
         // Poistetaan ensin aiheeseen liittyvät suoritukset tietokannasta.
         $query = DB::connection()->prepare('SELECT id FROM Suoritus WHERE aihe = :id');
         $query->execute(array('id' => $id));
-        
+
         $rows = $query->fetchAll();
-        foreach($rows as $row) {
+        foreach ($rows as $row) {
             Suoritus::poistaSuorituksenTekijat($row['id']);
         }
-        
+
         $query = DB::connection()->prepare('DELETE FROM Suoritus WHERE aihe = :id');
         $query->execute(array('id' => $id));
-        
+
         // Poistetaan itse aihe.
         $query = DB::connection()->prepare('DELETE FROM Aihe WHERE id = :id');
         $query->execute(array('id' => $id));
@@ -143,7 +148,7 @@ class Aihe extends BaseModel{
     public function validate_name() {
         $errors = array();
 
-        if($this->nimi == '' || $this->nimi == null){
+        if ($this->nimi == '' || $this->nimi == null) {
             array_push($errors, 'Nimi ei saa olla tyhjä!');
         }
 
@@ -153,15 +158,16 @@ class Aihe extends BaseModel{
 
         return $errors;
     }
-/*
-    public function validate_description() {
-        $errors = array();
 
-        if ($this->kuvaus == '' || $this->kuvaus == null) {
-            array_push($errors, 'Kuvaus ei saa olla tyhjä!');
-        }
+    /*
+      public function validate_description() {
+      $errors = array();
 
-        return $errors;
-    }
- */
+      if ($this->kuvaus == '' || $this->kuvaus == null) {
+      array_push($errors, 'Kuvaus ei saa olla tyhjä!');
+      }
+
+      return $errors;
+      }
+     */
 }

@@ -5,6 +5,10 @@ class OpiskelijaController extends BaseController {
         self::check_logged_in();
 
         $opiskelija = Opiskelija::find($id);
+        
+        if (!$opiskelija) {
+            View::make('/index.html', array('message' => 'Opiskelijaa ei löytynyt!'));
+        }
 
         $suoritukset = Suoritus::haeSuorituksetTekijanMukaan($id);
 
