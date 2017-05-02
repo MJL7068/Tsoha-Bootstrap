@@ -1,14 +1,21 @@
 <?php
 
 class SuoritusController extends BaseController {
+
     public static function show($id) {
         self::check_logged_in();
 
+        // Katsotaan ensin oko haettaava suoritusta olemassa
         $suoritus = Suoritus::find($id);
+        if (!$suoritus) {
+            Redirect::to('/', array('message' => 'Suoritusta ei ole olemassa!'));
+        }
 
+        // Haetaan tietokannasta suoritukseen liittyvä aihe ja ohjaaja
         $aihe = Aihe::find($suoritus->aihe);
         $ohjaaja = Opettaja::find($suoritus->ohjaaja);
-        
+
+        // Haetaan suoritukseen liittyvät tekijät
         $tekijat_id = Suoritus::haeSuorituksenTekijat($id);
         $tekijat = array();
         foreach ($tekijat_id as $tekija_id) {
@@ -38,7 +45,7 @@ class SuoritusController extends BaseController {
         $attributes = array(
             'aihe' => $aihe->id,
             'nimi' => $params['nimi'],
-            'ohjaaja' => $opettaja->id,                
+            'ohjaaja' => $opettaja->id,
             'kuvaus' => $params['kuvaus'],
             'tyomaara' => $params['tyomaara'],
             'arvosana' => $params['arvosana'],
@@ -50,31 +57,25 @@ class SuoritusController extends BaseController {
 
         if (count($errors) == 0) {
             $suoritus->tallenna();
-
             Redirect::to('/suoritus/' . $suoritus->id, array('message' => 'Uusi suoritus lisätty tietokantaan.'));
         } else {
-            $aiheet = Aihe::all(array());
-            $suorituksen_aihe = Aihe::find($aihe->id);
-            $opiskelijat = Opiskelija::all();
-            $opettajat = Opettaja::all();
-
-            View::make('suoritus/suoritus_uusi.html', array('aiheet' => $aiheet, 'opiskelijat' => $opiskelijat, 'opettajat' => $opettajat, 'errors' => $errors, 'attributes' => $attributes, 'suorituksenAihe' => $suorituksen_aihe));
+            Redirect::to('/suoritus/uusi/' . $aihe->id, array('errors' => $errors, 'attributes' => $attributes));
         }
     }
 
     public static function edit($id) {
         self::check_logged_in();
-
+        
         $suoritus = Suoritus::find($id);
         $aihe = Aihe::find($suoritus->aihe);
         $ohjaaja = Opettaja::find($suoritus->ohjaaja);
-        
+
         $tekijat_id = Suoritus::haeSuorituksenTekijat($id);
         $tekijat = array();
         foreach ($tekijat_id as $tekija_id) {
             array_push($tekijat, Opiskelija::find($tekija_id));
         }
-        
+
         $aiheet = Aihe::all(array());
         $opiskelijat = Opiskelija::all();
         $opettajat = Opettaja::all();
@@ -93,7 +94,7 @@ class SuoritusController extends BaseController {
             'aihe' => $aihe->id,
             'nimi' => $params['nimi'],
             'tekijat' => $params['tekijat'],
-            'ohjaaja' => $opettaja->id,                
+            'ohjaaja' => $opettaja->id,
             'kuvaus' => $params['kuvaus'],
             'tyomaara' => $params['tyomaara'],
             'arvosana' => $params['arvosana']
@@ -101,26 +102,25 @@ class SuoritusController extends BaseController {
 
         $suoritus = new Suoritus($attributes);
         $errors = $suoritus->errors();
-        
+
         if (count($errors) == 0) {
             $suoritus->update();
             Redirect::to('/suoritus/' . $suoritus->id, array('message' => 'Suoritusta muokattu onnistuneesti.'));
         } else {
             $suoritus = Suoritus::find($id);
             $aihe = Aihe::find($suoritus->aihe);
-            $ohjaaja = Opettaja::find($suoritus->ohjaaja);
-            
+
             $tekijat_id = Suoritus::haeSuorituksenTekijat($id);
             $tekijat = array();
             foreach ($tekijat_id as $tekija_id) {
                 array_push($tekijat, Opiskelija::find($tekija_id));
             }
-        
+
             $aiheet = Aihe::all(array());
             $opiskelijat = Opiskelija::all();
             $opettajat = Opettaja::all();
-            
-            View::make('suoritus/suoritus_edit.html', array('suoritus_id' => $suoritus->id, 'aihe' => $aihe, 'tekijat' => $tekijat, 'ohjaaja' => $ohjaaja, 'aiheet' => $aiheet, 'opiskelijat' => $opiskelijat, 'opettajat' => $opettajat, 'attributes' => $attributes, 'errors' => $errors));
+
+            View::make('suoritus/suoritus_edit.html', array('suoritus_id' => $suoritus->id, 'aihe' => $aihe, 'tekijat' => $tekijat, 'aiheet' => $aiheet, 'opiskelijat' => $opiskelijat, 'opettajat' => $opettajat, 'attributes' => $attributes, 'errors' => $errors));
         }
     }
 
@@ -129,4 +129,5 @@ class SuoritusController extends BaseController {
 
         Redirect::to('/', array('message' => 'Suoritus poistettu onnistunueesti.'));
     }
+
 }

@@ -33,6 +33,11 @@ class Suoritus extends BaseModel {
     }
 
     public static function find($id) {
+        // Tarkistetaan onko suorituksen tunnuksena annettu muuttuva kokonaisluku
+        if (!is_numeric($id)) {
+            return null;
+        }
+        
         $query = DB::connection()->prepare('SELECT * FROM Suoritus WHERE id = :id');
         $query->execute(array('id' => $id));
         $row = $query->fetch();
@@ -155,51 +160,34 @@ class Suoritus extends BaseModel {
         return $suoritukset;
     }
 
-    public static function laskeSuoritustenLukumaaraAiheenMukaan($aihe_id) {
-        $query = DB::connection()->prepare('SELECT COUNT(aihe) AS lukumaara FROM Suoritus WHERE aihe = :id');
-        $query->execute(array('id' => $aihe_id));
-        $row = $query->fetch();
-
-        if ($row) {
-            $lukumaara = $row['lukumaara'];
+    public static function laskeSuoritustenArvosanojenKeskiarvo($suoritukset) {
+        $summa = 0;
+        foreach ($suoritukset as $suoritus) {
+            $summa += $suoritus->arvosana;
         }
-
-        return $lukumaara;
+        
+        return number_format((float) ($summa / count($suoritukset)), 1, '.', '');
     }
 
-    public static function laskeSuoritustenArvosanojenKeskiarvo($aihe_id) {
-        $query = DB::connection()->prepare('SELECT AVG(arvosana) AS keskiarvo FROM Suoritus WHERE aihe = :id');
-        $query->execute(array('id' => $aihe_id));
-        $row = $query->fetch();
-
-        if ($row) {
-            $keskiarvo = $row['keskiarvo'];
+    public static function haeSuoritustenKorkeinarvosana($suoritukset) {
+        $korkein = 0;
+        foreach ($suoritukset as $suoritus) {
+            if ($suoritus->arvosana > $korkein) {
+                $korkein = $suoritus->arvosana;
+            }
         }
-
-        return number_format((float) $keskiarvo, 1, '.', '');
-    }
-
-    public static function haeKorkeinArvosanaAiheenMukaan($aihe_id) {
-        $query = DB::connection()->prepare('SELECT MAX(arvosana) AS korkein FROM Suoritus WHERE aihe = :id');
-        $query->execute(array('id' => $aihe_id));
-        $row = $query->fetch();
-
-        if ($row) {
-            $korkein = $row['korkein'];
-        }
-
+        
         return $korkein;
     }
 
-    public static function haeMatalinArvosanaAiheenMukaan($aihe_id) {
-        $query = DB::connection()->prepare('SELECT MIN(arvosana) AS matalin FROM Suoritus WHERE aihe = :id');
-        $query->execute(array('id' => $aihe_id));
-        $row = $query->fetch();
-
-        if ($row) {
-            $matalin = $row['matalin'];
+    public static function haeSuoritustenMatalinArvosana($suoritukset) {
+        $matalin = 5;
+        foreach ($suoritukset as $suoritus) {
+            if ($suoritus->arvosana < $matalin) {
+                $matalin = $suoritus->arvosana;
+            }
         }
-
+        
         return $matalin;
     }
 

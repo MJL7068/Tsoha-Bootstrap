@@ -53,12 +53,4 @@ class Kurssi extends BaseModel{
             return $kurssi;
         }
     }
-
-    public function tallenna() {
-        $query = DB::connection()->prepare('INSERT INTO Kurssi (nimi) VALUES (:nimi) RETURNING ID');
-        $query->execute(array('nimi' => $this->nimi));
-
-        $row = $query->fetch();
-        $this->id = $row['id'];
-    }
 }

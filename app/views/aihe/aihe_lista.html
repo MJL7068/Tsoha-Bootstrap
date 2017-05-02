@@ -2,6 +2,7 @@
 {% block content %}
 
  <div class="container">
+     <p>{{message}}</p>
   <h2>Aiheet</h2>   
   <table class="table">
     <thead>
@@ -9,7 +10,7 @@
         <th>Työn nimi</th>
         <th>Vaikeustaso</th>
         <th>Maksimiarvosana</th>
-        <th>Kurssi</th>
+        <!--<th>Kurssi</th>-->
       </tr>
     </thead>
     <tbody>
@@ -18,7 +19,7 @@
         <td><a href="{{base_path}}/aihe/{{aihe.id}}">{{aihe.nimi}}</a></td>
         <td>{{aihe.vaikeustaso}}</td>
         <td>{{aihe.maksimiarvosana}}</td>
-        <td><a href="{{base_path}}/kurssi/{{aihe.kurssi}}">{{aihe.kurssi}}</a></td>
+        <!--<td><a href="{{base_path}}/kurssi/{{aihe.kurssi}}">{{aihe.kurssi}}</a></td>-->
       </tr>
       {% endfor %}
     </tbody>

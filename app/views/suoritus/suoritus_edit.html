@@ -36,7 +36,7 @@
         <label>Ohjaaja</label>
         <select name="ohjaaja" class="form-control" type="text"t>
             {% for o in opettajat %}
-            <option {% if (ohjaaja.nimi == o.nimi or attributes.ohjaaja == i.id) %} selected {% endif %}>{{o.nimi}}</option>
+            <option {% if (ohjaaja.nimi == o.nimi or attributes.ohjaaja == o.id) %} selected {% endif %}>{{o.nimi}}</option>
             {% endfor %}
         </select>
     </div>

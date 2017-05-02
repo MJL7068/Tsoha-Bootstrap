@@ -25,13 +25,21 @@ class AiheetController extends BaseController {
 
     public static function show($id) {
         $aihe = Aihe::find($id);
+        
+        // Jos aihetta ei löydy esimerkiksi huonon linkin takia, palataan aihelistaukseen ja annetaan virheilmoitus
         if (!$aihe) {
-            View::make('/index.html', array('message' => 'Aihetta ei ole olemassa!'));
+            Redirect::to('/aiheet', array('message' => 'Aihetta ei ole olemassa!'));
         }
         
-        $kurssi = Kurssi::find($aihe->kurssi);
-        $data = array('lukumaara' => Suoritus::laskeSuoritustenLukumaaraAiheenMukaan($id), 'keskiarvo' => Suoritus::laskeSuoritustenArvosanojenKeskiarvo($id), 'matalin' => Suoritus::haeMatalinArvosanaAiheenMukaan($id), 'korkein' => Suoritus::haeKorkeinArvosanaAiheenMukaan($id));
+        // Haetaan kaikki aiheeseen liittyvä informaatio
         $suoritukset = Suoritus::haeSuorituksetAiheenMukaan($id);
+        $kurssi = Kurssi::find($aihe->kurssi);
+        $aiheenSuoritustenKeskiarvo = Suoritus::laskeSuoritustenArvosanojenKeskiarvo($suoritukset);
+        $aiheenSuoritustenLukumaara = count($suoritukset);
+        $aiheenSuoritustenMatalinArvosana = Suoritus::haeSuoritustenMatalinArvosana($suoritukset);
+        $aiheenSuoritustenKorkeinArvosana = Suoritus::haeSuoritustenKorkeinarvosana($suoritukset);
+        
+        $data = array('lukumaara' => $aiheenSuoritustenLukumaara, 'keskiarvo' => $aiheenSuoritustenKeskiarvo, 'matalin' => $aiheenSuoritustenMatalinArvosana, 'korkein' => $aiheenSuoritustenKorkeinArvosana);
 
         View::make('aihe/aihe_esittely.html', array('aihe' => $aihe, 'suoritukset' => $suoritukset, 'kurssi' => $kurssi, 'data' => $data));
     }

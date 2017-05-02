@@ -31,8 +31,8 @@ class HelloWorldController extends BaseController {
 
         Kint::dump(Suoritus::haeSuorituksetOhjaajanMukaan(2));
 
-        Kint::dump(Suoritus::haeKorkeinArvosanaAiheenMukaan(2));
-        Kint::dump(Suoritus::haeMatalinArvosanaAiheenMukaan(2));
+        Kint::dump(Suoritus::haeSuoritustenKorkeinarvosana(2));
+        Kint::dump(Suoritus::haeSuoritustenMatalinArvosana(2));
 
         $ville = new Opiskelija(array(
             'nimi' => 'vi',
