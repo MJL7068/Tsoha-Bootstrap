@@ -25,6 +25,10 @@ class Kurssi extends BaseModel{
     }
 
     public static function find($id) {
+        if (!is_numeric($id)) {
+            return null;
+        }
+        
         $query = DB::connection()->prepare('SELECT * FROM Kurssi WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
         $row = $query->fetch();
@@ -36,6 +40,8 @@ class Kurssi extends BaseModel{
             ));
 
             return $kurssi;
+        } else {
+            return null;
         }
     }
 

@@ -37,6 +37,7 @@ class SuoritusController extends BaseController {
     }
 
     public static function tallenna() {
+        self::check_logged_in();
         $params = $_POST;
 
         $aihe = Aihe::haeNimenPerusteella($params['aihe']);
@@ -84,6 +85,7 @@ class SuoritusController extends BaseController {
     }
 
     public static function update($id) {
+        self::check_logged_in();
         $params = $_POST;
 
         $aihe = Aihe::haeNimenPerusteella($params['aihe']);
@@ -125,6 +127,7 @@ class SuoritusController extends BaseController {
     }
 
     public static function poista($id) {
+        self::check_logged_in();
         Suoritus::poista($id);
 
         Redirect::to('/', array('message' => 'Suoritus poistettu onnistunueesti.'));

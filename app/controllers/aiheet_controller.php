@@ -1,14 +1,6 @@
 <?php
 
 class AiheetController extends BaseController {
-    
-    public static function index() {
-        $suoritusCount = Suoritus::count();
-        $aiheCount = Aihe::count();
-        $opiskelijaCount = Opiskelija::count();
-        
-        View::make('/index.html', array('suoritusCount' => $suoritusCount, 'aiheCount' => $aiheCount, 'opiskelijaCount' => $opiskelijaCount));
-    }
 
     public static function aihe_lista() {
         $params = $_GET; 
@@ -52,6 +44,7 @@ class AiheetController extends BaseController {
     }
 
     public static function tallenna() {
+        self::check_logged_in();
         $params = $_POST;
 
         $kurssi = Kurssi::haeNimenPerusteella($params['kurssi']);
@@ -88,6 +81,7 @@ class AiheetController extends BaseController {
     }
 
     public static function update($id) {
+        self::check_logged_in();
         $params = $_POST;
 
         $kurssi = Kurssi::haeNimenPerusteella($params['kurssi']);
@@ -117,9 +111,10 @@ class AiheetController extends BaseController {
     }
 
     public static function poista($id) {
+        self::check_logged_in();
         Aihe::poista($id);
 
-        Redirect::to('/', array('message' => 'Suoritus poistettu onnistunueesti.'));
+        Redirect::to('/', array('message' => 'Aihe poistettu onnistunueesti.'));
     }
 
 }

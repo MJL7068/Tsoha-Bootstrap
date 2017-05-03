@@ -161,6 +161,10 @@ class Suoritus extends BaseModel {
     }
 
     public static function laskeSuoritustenArvosanojenKeskiarvo($suoritukset) {
+        if (count($suoritukset) == 0) {
+            return 0;
+        }
+        
         $summa = 0;
         foreach ($suoritukset as $suoritus) {
             $summa += $suoritus->arvosana;
@@ -170,6 +174,10 @@ class Suoritus extends BaseModel {
     }
 
     public static function haeSuoritustenKorkeinarvosana($suoritukset) {
+        if (count($suoritukset) == 0) {
+            return 0;
+        }
+        
         $korkein = 0;
         foreach ($suoritukset as $suoritus) {
             if ($suoritus->arvosana > $korkein) {
@@ -181,6 +189,10 @@ class Suoritus extends BaseModel {
     }
 
     public static function haeSuoritustenMatalinArvosana($suoritukset) {
+        if (count($suoritukset) == 0) {
+            return 0;
+        }
+        
         $matalin = 5;
         foreach ($suoritukset as $suoritus) {
             if ($suoritus->arvosana < $matalin) {
