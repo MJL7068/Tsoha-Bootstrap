@@ -36,6 +36,10 @@
             array_push($errors, 'Nimen pituuden tulee olla vähintään kolme merkkiä!');
         }
 
+        if (strlen($this->nimi) > 50) {
+          array_push($errors, 'Nimi saa olla korkeintaan 50 merkkiä!');
+        }
+
         return $errors;
     }
 

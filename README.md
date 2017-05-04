@@ -26,7 +26,7 @@ Salasana: salasana123
 
 [Suorituksen esittelysivu](http://matleino.users.cs.helsinki.fi/projekti/suoritus/1). Sivulla näkyy opiskelijan harjoitustyösuoritukseen liittyviä yksityiskohtia.
 
-[Suorituksen muokkaussivu](http://matleino.users.cs.helsinki.fi/projekti/suoritusmuokkaus). Ylläpitäjä voi muokata suoritukseen liittyviä tietoja.
+[Suorituksen muokkaussivu](http://matleino.users.cs.helsinki.fi/projekti/suoritus/1/edit). Ylläpitäjä voi muokata suoritukseen liittyviä tietoja.
 
 [Opiskelijan esittelysivu](http://matleino.users.cs.helsinki.fi/projekti/opiskelija/1). Sivulla näkyy opiskelijaan liittyviä tietoja ja lista hänen tekemistään harjoitustöistä.
 
@@ -34,6 +34,6 @@ Salasana: salasana123
 
 [Aiheen lisäyssivu](http://matleino.users.cs.helsinki.fi/projekti/aihe/uusi)
 
-[Suorituksen lisäyssivu](http://matleino.users.cs.helsinki.fi/projekti/suoritus/1/uusi)
+[Suorituksen lisäyssivu](http://matleino.users.cs.helsinki.fi/projekti/suoritus/uusi/1)
 
 [Kirjautumissivu](http://matleino.users.cs.helsinki.fi/projekti/login)

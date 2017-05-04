@@ -231,34 +231,6 @@ class Suoritus extends BaseModel {
         }
     }
 
-    public function validate_name() {
-        $errors = array();
-
-        if ($this->nimi == '' || $this->nimi == null) {
-            array_push($errors, 'Nimi ei saa olla tyhjä!');
-        }
-
-        if (strlen($this->nimi) < 3) {
-            array_push($errors, 'Nimen pituuden tulee olla vähintään kolme merkkiä!');
-        }
-
-        return $errors;
-    }
-/*
-    public function validate_description() {
-        $errors = array();
-
-        if ($this->kuvaus == '' || $this->kuvaus == null) {
-            array_push($errors, 'Kuvaus ei saa olla tyhjä!');
-        }
-        
-        if (strlen($this->kuvaus) > 400) {
-            array_push($errors, 'Kuvaus saa olla korkeintaan 400 merkkiä pitkä!');
-        }
-
-        return $errors;
-    }
-*/
     public function validate_effort() {
         $errors = array();
 
@@ -270,7 +242,7 @@ class Suoritus extends BaseModel {
             array_push($errors, 'Työmäärä ei saa olla negatiivinen!');
         }
 
-        if ($this->tyomaara > 20000) {
+        if ($this->tyomaara > 2000) {
             array_push($errors, 'Annettu työmäärä liian suuri!');
         }
 

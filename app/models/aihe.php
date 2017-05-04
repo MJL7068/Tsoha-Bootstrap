@@ -18,7 +18,7 @@ class Aihe extends BaseModel {
             $arr['like'] = '%' . $options['search'] . '%';
         }
 
-        $query = DB::connection()->prepare($query_string/* 'SELECT * FROM Aihe' */);
+        $query = DB::connection()->prepare($query_string);
         $query->execute($arr);
 
         $rows = $query->fetchAll();
@@ -144,30 +144,4 @@ class Aihe extends BaseModel {
         $query = DB::connection()->prepare('UPDATE Aihe SET nimi = :nimi, vaikeustaso = :vaikeustaso, maksimiarvosana = :maksimiarvosana, kurssi = :kurssi, kuvaus = :kuvaus WHERE id = :id');
         $query->execute(array('nimi' => $this->nimi, 'vaikeustaso' => $this->vaikeustaso, 'maksimiarvosana' => $this->maksimiarvosana, 'kurssi' => $this->kurssi, 'kuvaus' => $this->kuvaus, 'id' => $this->id));
     }
-
-    public function validate_name() {
-        $errors = array();
-
-        if ($this->nimi == '' || $this->nimi == null) {
-            array_push($errors, 'Nimi ei saa olla tyhjä!');
-        }
-
-        if (strlen($this->nimi) < 3) {
-            array_push($errors, 'Nimen pituuden tulee olla vähintään kolme merkkiä!');
-        }
-
-        return $errors;
-    }
-
-    /*
-      public function validate_description() {
-      $errors = array();
-
-      if ($this->kuvaus == '' || $this->kuvaus == null) {
-      array_push($errors, 'Kuvaus ei saa olla tyhjä!');
-      }
-
-      return $errors;
-      }
-     */
 }
